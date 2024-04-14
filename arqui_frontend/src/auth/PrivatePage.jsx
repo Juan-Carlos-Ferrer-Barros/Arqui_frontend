@@ -6,7 +6,7 @@ const PageForbidden = () => {
     return (
         <>
             <h1>Error 403: Forbidden page</h1>
-            <p>You don&apos;t have permission to access this page</p>
+            <p>Authentication is required to access this page</p>
             <button onClick={() => window.history.back()}>Go back</button>
         </>
     );
