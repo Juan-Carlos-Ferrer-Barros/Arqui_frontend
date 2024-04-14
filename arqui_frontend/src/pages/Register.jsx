@@ -8,6 +8,7 @@ function Register() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [msg, setMsg] = useState('');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -20,7 +21,12 @@ function Register() {
             email,
             password,
         }).then((response) => {
-            if (response.status === 200) {
+            if (response.status === 201) {
+                setMsg('User created');
+                console.log('User created');
+            }
+            else if (response.status === 200) {
+                console.log('User created and logged in')
                 return login(response.data.userId, response.data.access_token);
             }
             else if (response.status === 400) {
@@ -34,6 +40,7 @@ function Register() {
     return (
         <>
             <h1>Register</h1>
+            {msg && <p>{msg}</p>}
             <form onSubmit={handleSubmit}>
                 <label htmlFor='username' className='form-username'>
                     Email:
