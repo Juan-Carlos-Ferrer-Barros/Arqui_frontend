@@ -6,15 +6,22 @@ function Login() {
     const { login } = useContext(AuthContext);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [msg, setMsg] = useState('');
 
     function handleSubmit(e) {
         e.preventDefault();
-        axios.post(`${import.meta.env.VITE_BACKEND_URL}/auth/login`, {
+        axios.post(`${import.meta.env.VITE_BACKEND_URL}/login`, {
             email,
             password,
         }).then((response) => {
             if (response.status === 200) {
                 return login(response.data.userId, response.data.access_token);
+            }
+            else if (response.status === 401) {
+                setMsg('Usuario o contraseña incorrecta');
+            }
+            else if (response.status === 404) {
+                setMsg('Usuario no encontrado');
             }
             console.error(response);
         }).catch((error) => {
@@ -25,6 +32,7 @@ function Login() {
     return (
         <>
             <h1>Login</h1>
+            {msg && <h1>{msg}</h1>}
             <form onSubmit={handleSubmit}>
                 <label htmlFor='email' className='form-email'>
                     Email:

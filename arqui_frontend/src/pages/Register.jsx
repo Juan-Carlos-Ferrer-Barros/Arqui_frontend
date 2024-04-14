@@ -16,8 +16,8 @@ function Register() {
             alert('Passwords do not match');
             return;
         }
-        axios.post(`${import.meta.env.VITE_BACKEND_URL}/auth/signup`, {
-            username,
+        axios.post(`${import.meta.env.VITE_BACKEND_URL}/signup`, {
+            name: username,
             email,
             password,
         }).then((response) => {
@@ -43,7 +43,7 @@ function Register() {
             {msg && <p>{msg}</p>}
             <form onSubmit={handleSubmit}>
                 <label htmlFor='username' className='form-username'>
-                    Email:
+                    Name:
                     <input
                         name='username'
                         type='text'
