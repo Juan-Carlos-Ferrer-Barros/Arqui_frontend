@@ -18,7 +18,7 @@ function AuthProvider({ children }) {
     function logout() {
         setToken(null);
         setUserId(false);
-        isLogged(false);
+        setIsLogged(false);
     }
 
     function login(userId, token) {
@@ -35,7 +35,7 @@ function AuthProvider({ children }) {
 }
 
 AuthProvider.propTypes = {
-    children: PropTypes.func,
+    children: PropTypes.node,
 };
 
 export default AuthProvider;
