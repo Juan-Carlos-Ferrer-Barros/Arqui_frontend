@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { AuthContext } from "./AuthContext";
+import PropTypes from "prop-types";
 
 function AuthProvider({ children }) {
     const [token, setToken] = useState(localStorage.getItem("token") || null);
@@ -32,5 +33,9 @@ function AuthProvider({ children }) {
         </AuthContext.Provider>
     );
 }
+
+AuthProvider.propTypes = {
+    children: PropTypes.func,
+};
 
 export default AuthProvider;
