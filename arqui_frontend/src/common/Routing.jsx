@@ -4,6 +4,8 @@ import Landing from '../landing/Landing'
 import Navbar from './Navbar'
 // import { useState, useEffect } from "react"
 // import PrivatePage from '../auth/PrivatePage'
+import Login from '../pages/Login'
+import Register from '../pages/Register'
 
 /*
 Para hacer páginas privadas que sólo se puede llegar logueado,
@@ -17,11 +19,13 @@ En (a) sería:
 export default function Routing(){
     return (
         <>
-        <Navbar />
         
         <BrowserRouter>
+        <Navbar />
             <Routes>
-                <Route path={'/'} element={<Landing/>}/>
+                <Route path={"/"} element={<Landing />} />
+                <Route path={"/login"} element={<Login />} />
+                <Route path={"/register"} element={<Register />} />
                 {/* (a) */}
             </Routes>
         </BrowserRouter>
