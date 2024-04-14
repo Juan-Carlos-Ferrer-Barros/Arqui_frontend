@@ -21,9 +21,9 @@ function AuthProvider({ children }) {
         isLogged(false);
     }
 
-    function login(token, userId) {
-        setToken(token);
+    function login(userId, token) {
         setUserId(userId);
+        setToken(token);
         setIsLogged(true);
     }
 
