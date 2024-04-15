@@ -1,0 +1,171 @@
+.secondNavbar {
+    font-family: 'Cooper Hewitt Thin', sans-serif;
+    position: fixed;
+    left: 50%;
+    top: 130px;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 0px;
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.secondNavbar button {
+    width: auto;
+    height: auto;
+    margin-top: 0rem;
+    background-color: #fff;
+    color: #15219a;
+    display: flex;
+    align-items: center;
+}
+
+.icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 15%;
+  height: auto;
+  background-color: #f5f5f5;
+  margin-right: 10px;
+  
+}
+
+.date-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 23%;
+  height: auto;
+  background-color: #f5f5f5;
+  margin-right: 10px;
+}
+
+.leftairplane-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 12%;
+  height: auto;
+  background-color: #f5f5f5;
+  margin-right: 10px;
+  margin-left: 50px;
+}
+
+.rightairplane-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 10%;
+  height: auto;
+  background-color: #f5f5f5;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.separador {
+    width: 1px;   
+    height: 30px;
+    background-color: #15219a;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.title {
+    position: fixed;
+    left: 13%;
+    top: 200px;
+    font-size: 3em;
+    color: #15219a;
+    font-weight: 500;
+    margin-right: 10px;
+}
+
+.datecontainer {
+    font-family: 'Cooper Hewitt Thin', sans-serif;
+    position: fixed;
+    left: 50%;
+    top: 350px;
+    transform: translate(-50%, -50%);
+    width: 70%;
+    height: 0px;
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.datecontainer button {
+    width: 100%;
+    height: auto;
+    margin-top: 0rem;
+    background-color: #fff;
+    color: #15219a;
+}
+.ticket-container {
+    font-family: 'Cooper Hewitt', sans-serif;
+    position: fixed;
+    left: 50%;
+    top: 490px;
+    transform: translate(-50%, -50%);
+    width: 70%;
+    height: 100px;
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    
+}
+
+.ticket-distribución {
+    display: grid;
+    flex-direction: column;
+    grid-template-columns: repeat(4, 1fr);
+    
+}
+
+.ticket-distribución > div {
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.ticket-distribución h2,
+.ticket-distribución h3,
+.ticket-distribución p {
+    margin: 0;
+}
+
+.ticket-distribución h2 {
+    color: #15219a; /* Cambia el color según tu preferencia */
+}
+
+.ticket-distribución h3 {
+    font-weight: normal;
+    color: #666; /* Cambia el color según tu preferencia */
+}
+
+.ticket-distribución p {
+    color: #0e1a9d; /* Cambia el color según tu preferencia */
+}
+
+.line {
+    width: 100%;
+    margin: 10px;
+    margin-top: 20px;
+    border: 0.1px solid #15219a; /* Cambia el color según tu preferencia */
+}
+
+.tipo {
+    margin: 0;
+    color: #39917b; /* Cambia el color según tu preferencia */
+    text-align: left;
+    margin-left: 10px;
+}

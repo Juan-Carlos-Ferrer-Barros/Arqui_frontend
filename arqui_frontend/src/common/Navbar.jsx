@@ -41,7 +41,7 @@ function Navbar() {
             <button> Estado de vuelo</button>
         </li>
         <li className="navbar-item">
-          <a href='/login'><button className="navbar-button">Iniciar Sección</button></a>
+          <a href='/login'><button className="navbar-button">Iniciar Sesión</button></a>
         </li>
       
       </ul>
