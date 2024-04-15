@@ -2,6 +2,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Landing from '../landing/Landing'
 import App from './App'
 import Navbar from './Navbar'
+import UserLogin from './UserLogin'
+import UserSignup from './UserSignup'
 import { useState, useEffect } from "react"
 
 export default function Routing(){
@@ -14,7 +16,8 @@ export default function Routing(){
         <BrowserRouter>
             <Routes>
                 <Route path={'/'} element={<Landing/>}/>
-
+                <Route path={'/login'} element={<UserLogin/>}/>
+                <Route path={'/signup'} element={<UserSignup/>}/>
             </Routes>
         </BrowserRouter>
         </>
