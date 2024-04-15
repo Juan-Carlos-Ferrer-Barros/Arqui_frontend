@@ -101,7 +101,7 @@ button:hover {
 
 .info-box {
   position: absolute;
-  top: 90%;
+  top: 95%;
   left: 50%;
   width: 70%;
   transform: translate(-50%, -50%);
@@ -119,9 +119,13 @@ button:hover {
   border: 1px solid #0c1361;
   border-radius: 5px;
   padding: 10px 20px;
+  max-width: 20%;
 }
 
 .info-buttons button:hover {
   background-color: #0c1361;
   color: #fff;
 }
+
+
+
