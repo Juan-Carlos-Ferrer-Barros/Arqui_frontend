@@ -2,6 +2,7 @@ import React from 'react';
 import { useContext, useEffect } from 'react';
 import './Navbar.css';
 import Logo from '../assets/logo.png';
+import { Link } from 'react-router-dom';
 
 function Navbar() {
 
@@ -40,7 +41,7 @@ function Navbar() {
             <button> Estado de vuelo</button>
         </li>
         <li className="navbar-item">
-          <button className="navbar-button">Iniciar Sección</button>
+          <a href='/login'><button className="navbar-button">Iniciar Sección</button></a>
         </li>
       
       </ul>

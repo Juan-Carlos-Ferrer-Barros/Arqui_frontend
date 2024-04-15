@@ -120,3 +120,8 @@ button:hover {
   border-radius: 5px;
   padding: 10px 20px;
 }
+
+.info-buttons button:hover {
+  background-color: #0c1361;
+  color: #fff;
+}

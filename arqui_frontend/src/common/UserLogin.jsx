@@ -12,8 +12,10 @@ function UserLogin() {
                 <img src={Background} alt="Background" className="background-image"/>
             <div className = "form-container">
                 <div className = "form">
-                    <img src={DarkLogo} alt="Logo" className="logo-container"/>
+                    <a href='/'><img src={DarkLogo} alt="Logo" className="logo-container"/></a>
                     <h2 className="form-title">Ingresa tu usuario</h2>
+                    <br></br>
+                    <br></br>
                     <form>
                         <div className="form-group">
                     
@@ -22,7 +24,7 @@ function UserLogin() {
                         </div>
                         
                         <button className="form-button">Iniciar sesión</button>
-                        <li className="cuenta-button">Crear cuenta</li>
+                        <a href='/signup'><li className="cuenta-button">Crear cuenta</li></a>
                         <hr className="line"/>
                         <h3> ¿No puedes ingresar a tu cuenta? Recupera el acceso</h3>
                     </form>

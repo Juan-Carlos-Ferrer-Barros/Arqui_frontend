@@ -12,9 +12,9 @@ function UserSignup() {
                 <img src={Background} alt="Background" className="background-image"/>
             <div className = "form-container">
                 <div className = "form">
-                    <img src={DarkLogo} alt="Logo" className="logo-container"/>
+                <a href='/'><img src={DarkLogo} alt="Logo" className="logo-container"/></a>
                     <h2 className="form-title2">Crear usuario</h2>
-                    <h3 className='text-container'> Si ya eres parte de flightsUC, no necesitas crear una cuenta nueva. Inicia secsión con tus datos de siempre </h3>
+                    <h3 className='text-container'> Si ya eres parte de flightsUC, no necesitas crear una cuenta nueva. <a href= '/login'>Inicia sesión </a> con tus datos de siempre </h3>
                     <form>
                         <div className="form-group">
                     
