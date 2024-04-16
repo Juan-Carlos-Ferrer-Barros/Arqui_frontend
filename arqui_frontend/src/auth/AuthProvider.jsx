@@ -17,6 +17,7 @@ function AuthProvider({ children }) {
     function logout() {
         setToken(null);
         setUserId(false);
+        window.location.reload(false);
         console.log("logout");
     }
 
