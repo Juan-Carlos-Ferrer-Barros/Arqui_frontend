@@ -17,9 +17,9 @@ export default function Routing(){
         <BrowserRouter>
             <Routes>
                 <Route path={'/'} element={<Landing/>}/>
-                <Route path={'/login'} element={<UserLogin/>}/>
-                <Route path={'/signup'} element={<UserSignup/>}/>
-                <Route path={'/ticket'} element={<Ticket/>}/>
+                <Route path={'/login'} element={<UserLogin />}/>
+                <Route path={'/signup'} element={<UserSignup />}/>
+                <Route path={'/ticket'} element={<Ticket />}/>
             </Routes>
         </BrowserRouter>
         </>
