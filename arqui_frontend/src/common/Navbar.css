@@ -5,6 +5,7 @@
   background-color: #070b38;
   color: #fff;
   width: 100%; /* Ocupa todo el ancho de la página */
+  z-index: 1000;
 }
 
 .navbar-list {

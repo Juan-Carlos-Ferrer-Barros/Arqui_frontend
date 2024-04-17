@@ -13,7 +13,9 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
+    z-index: 1000;
 }
+
 
 .secondNavbar button {
     width: auto;
@@ -77,7 +79,7 @@
 }
 
 .title {
-    position: fixed;
+    position: absolute;
     left: 13%;
     top: 200px;
     font-size: 3em;
@@ -88,7 +90,7 @@
 
 .datecontainer {
     font-family: 'Cooper Hewitt Thin', sans-serif;
-    position: fixed;
+    position: absolute;
     left: 50%;
     top: 350px;
     transform: translate(-50%, -50%);
@@ -110,9 +112,10 @@
     background-color: #fff;
     color: #15219a;
 }
+
 .ticket-container {
     font-family: 'Cooper Hewitt', sans-serif;
-    position: fixed;
+    position: absolute;
     left: 50%;
     top: 490px;
     transform: translate(-50%, -50%);
@@ -169,3 +172,10 @@
     text-align: left;
     margin-left: 10px;
 }
+
+.scroll {
+    height: 100vh;
+    overflow: auto;
+    z-index: 1;
+}
+
