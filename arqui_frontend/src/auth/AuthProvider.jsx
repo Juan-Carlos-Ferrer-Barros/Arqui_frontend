@@ -4,31 +4,31 @@ import PropTypes from "prop-types";
 
 function AuthProvider({ children }) {
     const [token, setToken] = useState(localStorage.getItem("token") || null);
-    const [userId, setUserId] = useState(localStorage.getItem("userId") || null);
+    // const [userId, setUserId] = useState(localStorage.getItem("userId") || null);
 
     useEffect(() => {
         localStorage.setItem("token", token);
     }, [token]);
 
-    useEffect(() => {
-        localStorage.setItem("userId", userId);
-    }, [userId]);
+    // useEffect(() => {
+    //     localStorage.setItem("userId", userId);
+    // }, [userId]);
 
     function logout() {
         setToken(null);
-        setUserId(false);
+        // setUserId(false);
         window.location.reload(false);
         console.log("logout");
     }
 
-    function login(userId, token) {
-        setUserId(userId);
+    function login(token) {
+        // setUserId(userId);
         setToken(token);
         console.log("login");
     }
 
     return (
-        <AuthContext.Provider value={{ token, userId, login, logout }}>
+        <AuthContext.Provider value={{ token, login, logout }}>
             {children}
         </AuthContext.Provider>
     );

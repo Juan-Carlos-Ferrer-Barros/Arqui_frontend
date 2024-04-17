@@ -6,6 +6,7 @@ function sendAuthRequest(method, url, token) {
         url,
         headers: {
             Authorization: `Bearer ${token}`,
+            // User: localStorage.getItem('userId')
         }
     }).then((response) => {
         return response.data;

@@ -21,7 +21,7 @@ function UserLogin() {
         }).then((response) => {
             if (response.status === 200) {
                 setMsg({type: 3, text: ''});
-                return login(response.data.userId, response.data.access_token);
+                return login(response.data.access_token);
             }
             console.error(response);
         }).catch((error) => {
