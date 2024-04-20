@@ -38,6 +38,12 @@
   
 }
 
+.selectedDay {
+    background-color: blue;
+    color: white;
+}
+
+
 .date-container {
   display: flex;
   justify-content: center;

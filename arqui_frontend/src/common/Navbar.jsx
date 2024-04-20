@@ -36,7 +36,7 @@ function Navbar() {
             <button> Ofertas y destinos</button>
         </li>
         <li className='navbar-text'>
-            <button> Mis viajes</button>
+            <a href='/misvuelos'><button> Mis viajes</button></a>
         </li>
         <li className='navbar-text'>
             <button> Centro de ayuda</button>

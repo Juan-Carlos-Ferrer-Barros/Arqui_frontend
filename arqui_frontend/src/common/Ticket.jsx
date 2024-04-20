@@ -7,10 +7,16 @@ import departure from '../assets/departure.jpg'
 import dateLogo from '../assets/date.jpg'
 import person from '../assets/person.jpg'
 import { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom';
+
 
 
 
 function Ticket() {
+
+    let { formDeparture, formArrival, formDate } = useParams();
+
+    const hasParams = formDeparture && formArrival && formDate;
 
     const [flights, setFlights] = useState([]);
     const daysOfWeek = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
@@ -25,25 +31,34 @@ function Ticket() {
     dateMenos2.setDate(date.getDate() - 2);
 
     const [selectedDate, setSelectedDate] = useState(new Date());
+
+
+    useEffect(() => {
+        if (hasParams) {
+            const utcDate = new Date(formDate);
+            const timezoneOffset = new Date().getTimezoneOffset();
+            const adjustedDate = new Date(utcDate.getTime() + timezoneOffset * 60000);
+            setSelectedDate(adjustedDate);
+        } else {
+            setSelectedDate(null);
+            formDeparture = "";
+            formArrival = "";
+            formDate = "";
+        }
+    }, [formDeparture, formArrival, formDate]);
+
     const [currentPage, setCurrentPage] = useState(1);
 
-    const [filteredFlightLength, setFilteredFlightLength] = useState(0);
+    
+    // {url}/flights?departure={departure}&arrival={arrival}&date={date}
 
     useEffect(() => {
         // Aquí puedes realizar la llamada a la API para obtener los datos de los vuelos
         // y luego establecer los datos de vuelo en el estado usando setFlights
-        fetch(`https://api.nukor.xyz/flights?page=${currentPage}`)
+        fetch(`https://api.nukor.xyz/flights?page=${currentPage}&departure=${formDeparture}&arrival=${formArrival}`)
         .then(response => response.json())
         .then(data => {
             setFlights(data.flights);
-            setFilteredFlightLength(data.flights.filter(flight => {
-                const flightDate = new Date(flight.flights[0].departure_airport.time);
-                return (
-                    flightDate.getDate() === selectedDate.getDate() &&
-                    flightDate.getMonth() === selectedDate.getMonth() &&
-                    flightDate.getFullYear() === selectedDate.getFullYear()
-                );
-            }).length);
         });
     }, [currentPage]);
 
@@ -57,16 +72,51 @@ function Ticket() {
         setCurrentPage(currentPage - 1);
     };
 
+    const [displayedDays, setDisplayedDays] = useState([]);
+
+    // Función para obtener el rango de días que se mostrarán
+    const getDisplayedDays = () => {
+        const result = [];
+        const currentDate = new Date(selectedDate);
+
+        // Agregar días anteriores
+        for (let i = -2; i <= 2; i++) {
+            const day = new Date(currentDate);
+            day.setDate(day.getDate() + i);
+            result.push(day);
+        }
+        return result;
+    };
+
+    // Actualizar los días mostrados cuando cambia la fecha seleccionada o la página actual
+    useEffect(() => {
+        setDisplayedDays(getDisplayedDays());
+    }, [selectedDate, currentPage]);
+
+    // Función para avanzar un día
+    const nextDay = () => {
+        const nextDate = new Date(selectedDate);
+        nextDate.setDate(nextDate.getDate() + 1);
+        setSelectedDate(nextDate);
+    };
+
+    // Función para retroceder un día
+    const prevDay = () => {
+        const prevDate = new Date(selectedDate);
+        prevDate.setDate(prevDate.getDate() - 1);
+        setSelectedDate(prevDate);
+    };
+
     return (
     <div className='scroll'>
         <div className='secondNavbar'>
             <button> 
-                <img src={departure} alt="Logo" className="leftairplane-container"/> Origen      
-                <img src={arrival} alt="Logo" className="rightairplane-container"/> Destino
+                <img src={departure} alt="Logo" className="leftairplane-container"/> {formDeparture}      
+                <img src={arrival} alt="Logo" className="rightairplane-container"/> {formArrival}
             </button>
             <span className='separador'></span>
             <button> 
-                <img src={dateLogo} alt="Logo" className="date-container"/> Fecha
+                <img src={dateLogo} alt="Logo" className="date-container"/> {formDate}
             </button>
             <span className='separador'></span>
             <button> 
@@ -80,46 +130,36 @@ function Ticket() {
         <h1 className='title'>Elige un vuelo</h1>
         <div className='datecontainer'>
              <span className='separador'></span>
-            <button onClick={() => setSelectedDate(dateMenos2)}>{daysOfWeek[dateMenos2.getDay()].slice(0, 3)}, {dateMenos2.getDate()}-{dateMenos2.getMonth()+1}</button>
-            <span className='separador'></span>
-            <button onClick={() => setSelectedDate(dateMenos1)}>{daysOfWeek[dateMenos1.getDay()].slice(0, 3)}, {dateMenos1.getDate()}-{dateMenos1.getMonth()+1}</button>
-            <span className='separador'></span>
-            <button onClick={() => setSelectedDate(date)}>{daysOfWeek[date.getDay()].slice(0, 3)}, {date.getDate()}-{date.getMonth()+1}</button>
-            <span className='separador'></span>
-            <button onClick={() => setSelectedDate(dateMas1)}>{daysOfWeek[dateMas1.getDay()].slice(0, 3)}, {dateMas1.getDate()}-{dateMas1.getMonth()+1}</button>
-            <span className='separador'></span>
-            <button onClick={() => setSelectedDate(dateMas2)}>{daysOfWeek[dateMas2.getDay()].slice(0, 3)}, {dateMas2.getDate()}-{dateMas2.getMonth()+1}</button>
-            <span className='separador'></span>
+             {displayedDays.map((day, index) => (
+                <>
+                    <button key={index} onClick={() => setSelectedDate(day)}>
+                        {daysOfWeek[day.getDay()].slice(0, 3)}, {day.getDate()}-{day.getMonth() + 1}
+                    </button>
+                    <span className='separador'></span>
+                </>
+                ))}
         </div>
         
-        {flights.filter(flight => {
-            // Convertir la fecha de vuelo a un objeto Date
-            const flightDate = new Date(flight.flights[0].departure_airport.time);
-            
-            // Comprobar si la fecha del vuelo es igual a la fecha del botón
-            return (
-                flightDate.getDate() === selectedDate.getDate() &&
-                flightDate.getMonth() === selectedDate.getMonth() &&
-                flightDate.getFullYear() === selectedDate.getFullYear()
-            );
-        }).map((filteredFlight, index) => (
+        {flights.map((flight, index) => (
+            <button>
             <div key={index} className='ticket-container' style={{ top: `${490 + index * 200}px` }}>
                 <div className='ticket-distribución'>
-                    <h2>{filteredFlight.flights[0].departure_airport.time.split(' ')[1]} {filteredFlight.flights[0].departure_airport.id}</h2>
+                    <h2>{flight.flights[0].departure_airport.time.split(' ')[1]} {flight.flights[0].departure_airport.id}</h2>
                     <h3>Duración</h3>
-                    <h2>{filteredFlight.flights[0].arrival_airport.time.split(' ')[1]} {filteredFlight.flights[0].arrival_airport.id}</h2>
+                    <h2>{flight.flights[0].arrival_airport.time.split(' ')[1]} {flight.flights[0].arrival_airport.id}</h2>
                     <h3>Tarifa desde</h3>
                     <p></p>
-                    <p>{Math.floor(filteredFlight.flights[0].duration/60)}h {filteredFlight.flights[0].duration%60} min</p>
+                    <p>{Math.floor(flight.flights[0].duration/60)}h {flight.flights[0].duration%60} min</p>
                     <p></p>
-                    <p>CLP {filteredFlight.price}</p>
+                    <p>CLP {flight.price}</p>
                 </div>
                 <hr className='line'/>
                 <p className='tipo'>Directo</p>
             </div>
+            </button>
         ))}
     
-    <div className='datecontainer' style={{ top: `${490 + filteredFlightLength * 200}px` }}>
+    <div className='datecontainer' style={{ top: `${490 + flights.length * 200}px` }}>
             <button onClick={prevPage} disabled={currentPage === 1}>Anterior</button>
              <span className='separador'></span>
              <button onClick={nextPage}>Siguiente</button>
