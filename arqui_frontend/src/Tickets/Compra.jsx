@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import './Compra.css'
+import DarkLogo from '../assets/darklogo.png' 
 
 function Compra() {
     const { flightId } = useParams(); // Suponiendo que flightId es el parámetro que identifica el vuelo seleccionado
@@ -42,19 +43,22 @@ function Compra() {
             <div className='opacity'></div>
                 {flightInfo ? (
                     <div className='informacion-compra'>
+                        <a href='/'><img src={DarkLogo} alt="Logo" className="logo-container"/></a>
+                        <img src={flightInfo.airlineLogo} className='logo-aerolinea'></img>
                         <h1>Detalles del vuelo</h1>
                         <h1>Salida: {flightInfo.departure_time}</h1>
                         <h1>Llegada: {flightInfo.arrival_time}</h1>
                         <h1>Duración: {flightInfo.duration} minutos</h1>
                         <h1>Tarifa: CLP {flightInfo.price}</h1>
                         <h1>Cantidad Asientos disponibles: {flightInfo.available_seats}</h1>
+                        <button onClick={() => realizarCompra()}>Comprar!!</button>
                         {/* Agrega aquí cualquier otra información que desees mostrar */}
                     </div>
             ) : (
                 <p>Cargando información del vuelo...</p>
             )}
 
-            <button onClick={() => realizarCompra()}>Comprar!!</button>
+            
         </div>
     );
 }
