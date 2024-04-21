@@ -1,7 +1,4 @@
 import './Ticket.css'
-import DarkLogo from '../assets/darklogo.png'
-import Background from '../assets/background.jpg'
-
 
 function MisVuelos() {
 

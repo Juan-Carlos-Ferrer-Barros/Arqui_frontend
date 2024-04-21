@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import axios from 'axios'
-import Logo from '../assets/logo.png'
 import DarkLogo from '../assets/darklogo.png'
 import Background from '../assets/background.jpg'
 import './User.css'

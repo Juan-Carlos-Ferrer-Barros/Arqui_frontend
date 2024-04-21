@@ -1,9 +1,8 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import './Landing.css';
 import planeImage from '../assets/plane.png';
 import anuncioImage from '../assets/anuncio.jpeg';
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 
 const Landing = () => {

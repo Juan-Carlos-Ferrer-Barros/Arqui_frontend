@@ -1,5 +1,4 @@
 import { useState, useContext } from 'react'
-import Logo from '../assets/logo.png'
 import DarkLogo from '../assets/darklogo.png'
 import Background from '../assets/background.jpg'
 import './User.css'

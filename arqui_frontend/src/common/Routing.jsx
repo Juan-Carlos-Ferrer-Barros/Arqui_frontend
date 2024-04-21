@@ -1,14 +1,12 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Landing from '../landing/Landing'
-import App from './App'
 import Navbar from './Navbar'
 import UserLogin from '../user/UserLogin'
 import UserSignup from '../user/UserSignup'
 import Ticket from '../Tickets/Ticket'
 import MisVuelos from '../Tickets/MisVuelos'
 import AllTickets from '../Tickets/AllTickets'
-import { useState, useEffect } from "react"
-import PrivateRoute from "../auth/PrivateRoute"
+// import PrivateRoute from "../auth/PrivateRoute"
 
 export default function Routing(){
     

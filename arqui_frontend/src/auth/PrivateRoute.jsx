@@ -1,6 +1,6 @@
-import { Outlet, Navigate } from "react-router-dom";
-import { useState, useEffect, useContext } from "react";
-import { AuthContext } from "./AuthContext";
+// import { Outlet, Navigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+// import { AuthContext } from "./AuthContext";
 import PropTypes from "prop-types";
 
 const PageForbidden = () => {
