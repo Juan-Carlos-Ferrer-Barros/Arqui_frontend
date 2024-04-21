@@ -5,7 +5,7 @@ import departure from '../assets/departure.jpg'
 import dateLogo from '../assets/date.jpg'
 import person from '../assets/person.jpg'
 import { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom';
+import { useParams , Link} from 'react-router-dom';
 
 
 
@@ -71,6 +71,7 @@ function Ticket() {
     };
 
     const [displayedDays, setDisplayedDays] = useState([]);
+    const [selectedFlight, setSelectedFlight] = useState(null);
 
     // Función para obtener el rango de días que se mostrarán
     const getDisplayedDays = () => {
@@ -140,19 +141,26 @@ function Ticket() {
         
         {flights.map((flight, index) => (
             <button>
-            <div key={index} className='ticket-container' style={{ top: `${490 + index * 200}px` }}>
+            <div key={index} className={`ticket-container ${selectedFlight === index ? 'selected' : ''}`} onClick={() => setSelectedFlight(index)} style={{ top: `${490 + index * 200}px` }}>
                 <div className='ticket-distribución'>
-                    <h2>{flight.flights[0].departure_airport.time.split(' ')[1]} {flight.flights[0].departure_airport.id}</h2>
+                    <h2>{flight.departure_time.slice(11, 16)} {flight.departure_airport_id}</h2>
                     <h3>Duración</h3>
-                    <h2>{flight.flights[0].arrival_airport.time.split(' ')[1]} {flight.flights[0].arrival_airport.id}</h2>
+                    <h2>{flight.arrival_time.split(" ")[1]} {flight.arrival_airport_id}</h2>
                     <h3>Tarifa desde</h3>
                     <p></p>
-                    <p>{Math.floor(flight.flights[0].duration/60)}h {flight.flights[0].duration%60} min</p>
+                    <p>{Math.floor(flight.duration/60)}h {flight.duration%60} min</p>
                     <p></p>
                     <p>CLP {flight.price}</p>
                 </div>
                 <hr className='line'/>
-                <p className='tipo'>Directo</p>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <p className='tipo'>Directo</p>
+                    {selectedFlight === index && (
+                        <Link to={`/compra/${flight._id}`}>
+                            <button className='buy-ticket'>Comprar pasaje</button>
+                        </Link>
+                    )}
+                </div>
             </div>
             </button>
         ))}

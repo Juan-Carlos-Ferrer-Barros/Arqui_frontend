@@ -1,5 +1,6 @@
 import { useState, useContext } from 'react'
 import DarkLogo from '../assets/darklogo.png'
+import { useNavigate } from 'react-router-dom';
 import Background from '../assets/background.jpg'
 import './User.css'
 import axios from 'axios'
@@ -9,6 +10,7 @@ function UserLogin() {
     const { login } = useContext(AuthContext);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate()
     const [msg, setMsg] = useState({type: 0, text: ''});
 
     const handleSubmit = async (event) => {
@@ -19,8 +21,8 @@ function UserLogin() {
             password,
         }).then((response) => {
             if (response.status === 200) {
-                setMsg({type: 3, text: ''});
-                return login(response.data.access_token);
+                navigate('/')
+                login(response.data.access_token);
             }
             console.error(response);
         }).catch((error) => {

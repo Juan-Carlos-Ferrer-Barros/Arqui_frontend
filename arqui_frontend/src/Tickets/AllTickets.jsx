@@ -1,7 +1,8 @@
 import './Ticket.css'
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
-
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 
 
@@ -47,14 +48,17 @@ function AllTickets() {
     // {url}/flights?departure={departure}&arrival={arrival}&date={date}
 
     useEffect(() => {
-        // Aquí puedes realizar la llamada a la API para obtener los datos de los vuelos
-        // y luego establecer los datos de vuelo en el estado usando setFlights
-        fetch(`https://api.nukor.xyz/flights?page=${currentPage}`)
-        .then(response => response.json())
-        .then(data => {
-            setFlights(data.flights);
+        axios.get(`https://api.nukor.xyz/flights`)
+        .then(response => {
+            setFlights(response.data.flights);
+            //console.log(response.data.flights);
+        })
+        .catch(error => {
+            console.error('Error fetching flights:', error);
         });
     }, [currentPage]);
+
+    console.log(flights);
 
 
     const nextPage = () => {
@@ -114,12 +118,12 @@ function AllTickets() {
             <button>
             <div key={index} className={`ticket-container ${selectedFlight === index ? 'selected' : ''}`} onClick={() => setSelectedFlight(index)} style={{ top: `${410 + index * 200}px` }}>
                 <div className='ticket-distribución'>
-                    <h2>{flight.flights[0].departure_airport.time.split(' ')[1]} {flight.flights[0].departure_airport.id}</h2>
+                    <h2>{flight.departure_time.slice(11, 16)} {flight.departure_airport_id}</h2>
                     <h3>Duración</h3>
-                    <h2>{flight.flights[0].arrival_airport.time.split(' ')[1]} {flight.flights[0].arrival_airport.id}</h2>
+                    <h2>{flight.arrival_time.split(' ')[1]} {flight.arrival_airport_id}</h2>
                     <h3>Tarifa desde</h3>
                     <p></p>
-                    <p>{Math.floor(flight.flights[0].duration/60)}h {flight.flights[0].duration%60} min</p>
+                    <p>{Math.floor(flight.duration/60)}h {flight.duration%60} min</p>
                     <p></p>
                     <p>CLP {flight.price}</p>
                 </div>
@@ -127,7 +131,9 @@ function AllTickets() {
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                     <p className='tipo'>Directo</p>
                     {selectedFlight === index && (
-                        <button className='buy-ticket'>Comprar pasaje</button>
+                        <Link
+                            to={`/compra/${flight._id}`}
+                        ><button className='buy-ticket'>Comprar pasaje</button></Link>
                     )}
                 </div>
             </div>
