@@ -1,6 +1,4 @@
 import './Ticket.css'
-import DarkLogo from '../assets/darklogo.png'
-import Background from '../assets/background.jpg'
 import seat from '../assets/seat.jpg'
 import arrival from '../assets/arrival.jpg'
 import departure from '../assets/departure.jpg'

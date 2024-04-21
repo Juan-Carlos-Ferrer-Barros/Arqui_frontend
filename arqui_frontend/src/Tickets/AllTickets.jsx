@@ -1,6 +1,4 @@
 import './Ticket.css'
-import DarkLogo from '../assets/darklogo.png'
-import Background from '../assets/background.jpg'
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
 
@@ -92,18 +90,10 @@ function AllTickets() {
     }, [selectedDate, currentPage]);
 
     // Función para avanzar un día
-    const nextDay = () => {
-        const nextDate = new Date(selectedDate);
-        nextDate.setDate(nextDate.getDate() + 1);
-        setSelectedDate(nextDate);
-    };
+    
 
     // Función para retroceder un día
-    const prevDay = () => {
-        const prevDate = new Date(selectedDate);
-        prevDate.setDate(prevDate.getDate() - 1);
-        setSelectedDate(prevDate);
-    };
+    
 
     return (
     <div className='scroll'>
