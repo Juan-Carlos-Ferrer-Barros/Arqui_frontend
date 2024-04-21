@@ -20,11 +20,15 @@ function UserLogin() {
             email,
             password,
         }).then((response) => {
-            if (response.status === 200) {
-                navigate('/')
-                login(response.data.access_token);
+            console.log(response);
+            if (response.data === 'User not found') {
+                setMsg({type: 2, text: 'Usuario no encontrado'});
             }
-            console.error(response);
+            if (response.data.access_token) {
+                login(response.data.access_token);
+                navigate('/')
+            }
+            // console.error(response);
         }).catch((error) => {
             if (error.response.status === 403) {
                 setMsg({type: 1, text: 'Contraseña incorrecta'});
