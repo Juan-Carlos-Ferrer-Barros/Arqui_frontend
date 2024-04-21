@@ -46,7 +46,6 @@ function UserSignup() {
         <div className = "background">
             <div className = "opacity"></div>
                 <img src={Background} alt="Background" className="background-image"/>
-            <div className = "form-container">
                 <div className = "form">
                 <a href='/'><img src={DarkLogo} alt="Logo" className="logo-container"/></a>
                     <h2 className="form-title2">Crear usuario</h2>
@@ -110,7 +109,6 @@ function UserSignup() {
                         <button onClick={handleSubmit} className="form-button">Crear cuenta</button>
                         
                     </form>
-                </div>
             </div>
         </div>
     </div>

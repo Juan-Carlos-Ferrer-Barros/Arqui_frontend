@@ -79,7 +79,7 @@
 .separador {
     width: 1px;   
     height: 30px;
-    background-color: #15219a;
+    background-color: #070b38;
     margin-right: 10px;
     margin-left: 10px;
 }
@@ -89,7 +89,7 @@
     left: 13%;
     top: 200px;
     font-size: 3em;
-    color: #15219a;
+    color: #070b38;
     font-weight: 500;
     margin-right: 10px;
 }
@@ -99,7 +99,7 @@
     left: 13%;
     top: 130px;
     font-size: 3em;
-    color: #15219a;
+    color: #070b38;
     font-weight: 500;
     margin-right: 10px;
 }
@@ -203,9 +203,8 @@
 
 .line {
     width: 100%;
-    margin: 10px;
     margin-top: 20px;
-    border: 0.1px solid #15219a; /* Cambia el color según tu preferencia */
+    border: 0.1px solid #070b38; /* Cambia el color según tu preferencia */
 }
 
 .tipo {
