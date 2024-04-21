@@ -94,11 +94,38 @@
     margin-right: 10px;
 }
 
+.titleNoNavbar {
+    position: absolute;
+    left: 13%;
+    top: 130px;
+    font-size: 3em;
+    color: #15219a;
+    font-weight: 500;
+    margin-right: 10px;
+}
+
 .datecontainer {
     font-family: 'Cooper Hewitt Thin', sans-serif;
     position: absolute;
     left: 50%;
     top: 350px;
+    transform: translate(-50%, -50%);
+    width: 70%;
+    height: 0px;
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.datecontainerNoNavbar {
+    font-family: 'Cooper Hewitt Thin', sans-serif;
+    position: absolute;
+    left: 50%;
+    top: 270px;
     transform: translate(-50%, -50%);
     width: 70%;
     height: 0px;
@@ -119,6 +146,14 @@
     color: #15219a;
 }
 
+.datecontainerNoNavbar button {
+    width: 100%;
+    height: auto;
+    margin-top: 0rem;
+    background-color: #fff;
+    color: #15219a;
+}
+
 .ticket-container {
     font-family: 'Cooper Hewitt', sans-serif;
     position: absolute;
@@ -131,6 +166,7 @@
     background-color: #fff;
     border-radius: 1rem;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    transition: 0.3s ease;
     
 }
 
@@ -182,6 +218,41 @@
 .scroll {
     height: 100vh;
     overflow: auto;
+    padding-bottom: 50px;
     z-index: 1;
 }
 
+.pagecontainer {
+    font-family: 'Cooper Hewitt Bold', sans-serif;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40%;
+    padding: 2rem;
+    border-radius: 1rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.pagecontainer button {
+    background-color: rgb(242, 6, 65);
+    width: 70%;
+}
+
+.selectedDay {
+    background-color: blue; /* o cualquier otro color de fondo que prefieras */
+    color: white; /* color del texto */
+    /* otros estilos que desees aplicar al botón seleccionado */
+}
+.ticket-container.selected {
+    transform: translateY(-50%) translateX(-50%) scale(1.1);
+ /* Establece el origen de la transformación en el centro inferior */
+    z-index: 2;
+}
+
+.buy-ticket {
+    margin-bottom: -10px;
+    background-color: rgb(242, 6, 65);
+    margin-right: 45%;
+}

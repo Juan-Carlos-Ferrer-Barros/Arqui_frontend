@@ -15,7 +15,7 @@ function MisVuelos() {
             <h1 className='title'>Mis Viajes</h1>
 
             {flightss.flights.map((flight, index) => (
-            <div key={index} className='ticket-container' style={{ top: `${490 + index * 200}px` }}>
+            <div key={index} className='ticket-container' style={{ top: `${400 + index * 200}px` }}>
                 <div className='ticket-distribución'>
                     <h2>{flight.flights[0].departure_airport.time.split(' ')[1]} {flight.flights[0].departure_airport.id}</h2>
                     <h3>Duración</h3>

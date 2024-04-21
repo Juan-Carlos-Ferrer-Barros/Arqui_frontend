@@ -55,7 +55,7 @@ function Ticket() {
     useEffect(() => {
         // Aquí puedes realizar la llamada a la API para obtener los datos de los vuelos
         // y luego establecer los datos de vuelo en el estado usando setFlights
-        fetch(`https://api.nukor.xyz/flights?page=${currentPage}&departure=${formDeparture}&arrival=${formArrival}`)
+        fetch(`https://api.nukor.xyz/flights?page=${currentPage}&departure=${formDeparture}&arrival=${formArrival}&date=${formDate}`)
         .then(response => response.json())
         .then(data => {
             setFlights(data.flights);
@@ -159,7 +159,7 @@ function Ticket() {
             </button>
         ))}
     
-    <div className='datecontainer' style={{ top: `${490 + flights.length * 200}px` }}>
+    <div className='pagecontainer' style={{ top: `${490 + flights.length * 200}px` }}>
             <button onClick={prevPage} disabled={currentPage === 1}>Anterior</button>
              <span className='separador'></span>
              <button onClick={nextPage}>Siguiente</button>
