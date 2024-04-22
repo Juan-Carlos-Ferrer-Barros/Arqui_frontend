@@ -5,7 +5,7 @@ import axios from 'axios';
 function EstadoCompras() {
 
     const token = localStorage.getItem('token');
-    const [requests, setRequests] = useState([]);
+    let [requests, setRequests] = useState([]);
 
     useEffect(() => {
         axios.get(`https://api.nukor.xyz/requests`, {
@@ -19,6 +19,12 @@ function EstadoCompras() {
             console.error('Error fetching flight information:', error);
         });
     }, []);
+
+    useEffect(() => {
+        if (!token) {
+            window.location.reload();
+        }
+    }, [token]);
 
     return (
         <div className='scroll'>

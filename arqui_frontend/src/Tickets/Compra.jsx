@@ -46,7 +46,7 @@ function Compra() {
             quantity: cantidadPasajes
         };
 
-        navigate('/estadocompras');
+        navigate('/');
 
         console.log(datosCompra);
 
