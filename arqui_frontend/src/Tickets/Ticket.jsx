@@ -5,7 +5,9 @@ import departure from '../assets/departure.jpg'
 import dateLogo from '../assets/date.jpg'
 import person from '../assets/person.jpg'
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom';
 import { useParams , Link} from 'react-router-dom';
+
 
 
 
@@ -15,6 +17,11 @@ function Ticket() {
     let { formDeparture, formArrival, formDate } = useParams();
 
     const hasParams = formDeparture && formArrival && formDate;
+
+    const navigate = useNavigate();
+
+    const token = localStorage.getItem('token');
+    const [isLogged, setIsLogged] = useState(token !== "null");
 
     const [flights, setFlights] = useState([]);
     const daysOfWeek = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
@@ -106,6 +113,14 @@ function Ticket() {
         setSelectedDate(prevDate);
     };
 
+    const realizarPosibleCompra = (flight) => {
+        if (!isLogged) {
+            alert("Debe iniciar sesión para comprar.");
+        } else {
+            navigate(`/compra/${flight._id}`);
+        }
+    };
+
     return (
     <div className='scroll'>
         <div className='secondNavbar'>
@@ -156,9 +171,7 @@ function Ticket() {
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                     <p className='tipo'>Directo</p>
                     {selectedFlight === index && (
-                        <Link to={`/compra/${flight._id}`}>
-                            <button className='buy-ticket'>Comprar pasaje</button>
-                        </Link>
+                        <button className='buy-ticket' onClick={() => realizarPosibleCompra(flight)}>Comprar pasaje</button>
                     )}
                 </div>
             </div>

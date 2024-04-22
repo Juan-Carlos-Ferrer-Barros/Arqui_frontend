@@ -50,7 +50,7 @@ function Navbar() {
         <li></li>
 
         <li className='navbar-text'>
-            <button> Estado de vuelo</button>
+            <a href='/estadocompras'><button> Estado de compra</button></a>
         </li>
         {!isLogged ? 
           <li className="navbar-item">

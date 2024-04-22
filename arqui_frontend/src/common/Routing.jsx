@@ -7,6 +7,7 @@ import Ticket from '../Tickets/Ticket'
 import MisVuelos from '../Tickets/MisVuelos'
 import AllTickets from '../Tickets/AllTickets'
 import Compra from '../Tickets/Compra'
+import EstadoCompras from "../Tickets/EstadoCompra"
 // import PrivateRoute from "../auth/PrivateRoute"
 
 export default function Routing(){
@@ -23,6 +24,7 @@ export default function Routing(){
                 <Route path={'/ticket/flights/:formDeparture/:formArrival/:formDate'} element={<><Navbar /><Ticket /></>}/>
                 <Route path={'/tickets'} element={<><Navbar /><AllTickets /></>}/> 
                 <Route path={'/misvuelos'} element={<><Navbar /><MisVuelos /></>}/>
+                <Route path={'/estadocompras'} element={<><Navbar /><EstadoCompras /></>}/>
                 <Route path={'/compra/:flightId'} element={<><Navbar /><Compra /></>}/>
                 <Route path={'*'} element={<h1>Page not found</h1>}/>
             </Routes>

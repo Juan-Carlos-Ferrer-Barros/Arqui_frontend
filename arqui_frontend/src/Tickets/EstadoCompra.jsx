@@ -2,16 +2,18 @@ import './Ticket.css'
 import { useState, useEffect } from 'react'
 import axios from 'axios';
 
-function MisVuelos() {
+function EstadoCompras() {
 
     const token = localStorage.getItem('token');
+    const [requests, setRequests] = useState();
 
     useEffect(() => {
         // Realizar la llamada a la API para obtener la información del vuelo seleccionado
         axios.get(`https://api.nukor.xyz/requests`, {headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `${token}`,
         }})
             .then(response => {
+                setRequests(response)
                 console.log(response.data); // Suponiendo que la respuesta contiene la información del vuelo
             })
             .catch(error => {
@@ -26,7 +28,7 @@ function MisVuelos() {
 
     return (
         <div className='scroll'>
-            <h1 className='titleNoNavbar'>Mis Viajes</h1>
+            <h1 className='titleNoNavbar'>Mis Compras</h1>
 
             {flightss.flights.map((flight, index) => (
             <div key={index} className='ticket-container' style={{ top: `${330 + index * 200}px` }}>
@@ -50,4 +52,4 @@ function MisVuelos() {
         )
     }
 
-export default MisVuelos;
+export default EstadoCompras;
