@@ -255,3 +255,12 @@
     background-color: rgb(242, 6, 65);
     width: 25%
 }
+
+.validation{
+    font-family: 'Cooper Hewitt', sans-serif;
+    padding: 2rem;
+    color: #39917b;
+    margin: -30px;
+    text-align: right;
+
+}

@@ -5,12 +5,14 @@ import './Compra.css'
 import DarkLogo from '../assets/darklogo.png' 
 import Arrow from '../assets/arrow.png'
 import sendAuthRequest from '../auth/authRequest';
+import { useNavigate } from 'react-router-dom';
 
 function Compra() {
     const { flightId } = useParams(); // Suponiendo que flightId es el parámetro que identifica el vuelo seleccionado
     const [flightInfo, setFlightInfo] = useState(null);
     const [cantidadPasajes, setCantidadPasajes] = useState(1);
     const token = localStorage.getItem('token');
+    const navigate = useNavigate();
 
     const handleChange = (event) => {
         const newValue = event.target.value;
@@ -43,6 +45,8 @@ function Compra() {
             flight_id: flightId,
             quantity: cantidadPasajes
         };
+
+        navigate('/estadocompras');
 
         console.log(datosCompra);
 

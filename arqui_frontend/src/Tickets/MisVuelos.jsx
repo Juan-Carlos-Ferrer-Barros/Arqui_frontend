@@ -2,52 +2,52 @@ import './Ticket.css'
 import { useState, useEffect } from 'react'
 import axios from 'axios';
 
-function MisVuelos() {
+function EstadoCompras() {
 
     const token = localStorage.getItem('token');
+    const [requests, setRequests] = useState([]);
 
     useEffect(() => {
-        // Realizar la llamada a la API para obtener la información del vuelo seleccionado
-        axios.get(`https://api.nukor.xyz/requests`, {headers: {
-            Authorization: `Bearer ${token}`,
-        }})
-            .then(response => {
-                console.log(response.data); // Suponiendo que la respuesta contiene la información del vuelo
-            })
-            .catch(error => {
-                console.error('Error fetching flight information:', error);
-            });
+        axios.get(`https://api.nukor.xyz/requests`, {
+            headers: { Authorization: `${token}` }
+        })
+        .then(response => {
+            setRequests(response.data); // Asumiendo que response.data es un arreglo de vuelos
+            console.log(response.data);
+        })
+        .catch(error => {
+            console.error('Error fetching flight information:', error);
+        });
     }, []);
 
-    const flightss = {"flights": [
-        {"_id":"661485cebd518fd34878e1fd","flights":[{"departure_airport":{"name":"Aeropuerto de Roma-Fiumicino","id":"FCO","time":"2024-04-16 13:00"},"arrival_airport":{"name":"Aeropuerto Internacional de São Paulo-Guarulhos","id":"GRU","time":"2024-04-16 19:40"},"duration":700,"airplane":"Boeing 787","airline":"LATAM","airline_logo":"https://www.gstatic.com/flights/airline_logos/70px/LA.png"}],"price":379971,"carbonEmission":{"this_flight":659000},"airlineLogo":"https://www.gstatic.com/flights/airline_logos/70px/LA.png","currency":"CLP","createdAt":"2024-04-09T00:03:26.975Z","lastUpdate":"2024-04-09T00:03:26.975Z","availableSeats":90},
-        {"_id":"661486fbbd518fd34878e1fe","flights":[{"departure_airport":{"name":"Aeropuerto Adolfo Suárez Madrid-Barajas","id":"MAD","time":"2024-04-16 01:45"},"arrival_airport":{"name":"Aeropuerto Internacional El Dorado","id":"BOG","time":"2024-04-16 04:54"},"duration":609,"airplane":"Boeing 787","airline":"Avianca","airline_logo":"https://www.gstatic.com/flights/airline_logos/70px/AV.png"}],"price":394085,"carbonEmission":{"this_flight":592000},"airlineLogo":"https://www.gstatic.com/flights/airline_logos/70px/AV.png","currency":"CLP","createdAt":"2024-04-09T00:08:27.066Z","lastUpdate":"2024-04-09T00:08:27.066Z","availableSeats":90}
-    ]}
+    // Filtrar los vuelos por validationStatus igual a 'accepted'
+    const aprovedRequests = requests.filter(request => request.validationStatus === 'accepted');
 
     return (
         <div className='scroll'>
             <h1 className='titleNoNavbar'>Mis Viajes</h1>
 
-            {flightss.flights.map((flight, index) => (
-            <div key={index} className='ticket-container' style={{ top: `${330 + index * 200}px` }}>
-                <div className='ticket-distribución'>
-                    <h2>{flight.flights[0].departure_airport.time.split(' ')[1]} {flight.flights[0].departure_airport.id}</h2>
-                    <h3>Duración</h3>
-                    <h2>{flight.flights[0].arrival_airport.time.split(' ')[1]} {flight.flights[0].arrival_airport.id}</h2>
-                    <h3>Tarifa desde</h3>
-                    <p></p>
-                    <p>{Math.floor(flight.flights[0].duration/60)}h {flight.flights[0].duration%60} min</p>
-                    <p></p>
-                    <p>CLP {flight.price}</p>
+            {aprovedRequests.map((request, index) => (
+                <div key={index} className='ticket-container' style={{ top: `${330 + index * 200}px` }}>
+                    <div className='ticket-distribución'>
+                        <h2>{request.departure_time.slice(11,16)} {request.flight_info[0].departure_airport_id}</h2>
+                        <h3>Duración</h3>
+                        <h2>{request.flight_info[0].arrival_time.split(" ")[1]} {request.flight_info[0].arrival_airport_id}</h2>
+                        <h3>Tarifa desde</h3>
+                        <p></p>
+                        <p>{Math.floor(request.flight_info[0].duration / 60)}h {request.flight_info[0].duration % 60} min</p>
+                        <p></p>
+                        <p>CLP {request.flight_info[0].price}</p>
+                    </div>
+                    <hr className='line'/>
+                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <p className='tipo'>Directo</p>
+                        <p className='validation'>{request.validationStatus}</p>
+                    </div>
                 </div>
-                <hr className='line'/>
-                <p className='tipo'>Directo</p>
-            </div>
-        ))}
-        
-
+            ))}
         </div>
-        )
-    }
+    )
+}
 
-export default MisVuelos;
+export default EstadoCompras;
