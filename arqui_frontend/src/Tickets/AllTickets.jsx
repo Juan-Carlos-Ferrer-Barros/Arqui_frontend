@@ -52,7 +52,7 @@ function AllTickets() {
     // {url}/flights?departure={departure}&arrival={arrival}&date={date}
 
     useEffect(() => {
-        axios.get(`https://api.nukor.xyz/flights`)
+        axios.get(`https://api.nukor.xyz/flights?page=${currentPage}`)
         .then(response => {
             setFlights(response.data.flights);
             //console.log(response.data.flights);

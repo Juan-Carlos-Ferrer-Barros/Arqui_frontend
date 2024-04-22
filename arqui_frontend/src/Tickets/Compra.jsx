@@ -45,12 +45,18 @@ function Compra() {
             flight_id: flightId,
             quantity: cantidadPasajes
         };
+        
+        if (flightInfo.available_seats <  cantidadPasajes){
+            alert("No quedan asientos disponibles")
+            navigate('/tickets');
+        }
+        else {
+            navigate('/');
 
-        navigate('/');
+            console.log(datosCompra);
 
-        console.log(datosCompra);
-
-        sendAuthRequest('POST', 'https://api.nukor.xyz/request', token, datosCompra);
+            sendAuthRequest('POST', 'https://api.nukor.xyz/request', token, datosCompra);
+        }
     
         // Realizar la solicitud POST a la API con los datos de la compra
         
