@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
 import DarkLogo from '../assets/darklogo.png'
 import Background from '../assets/background.jpg'
@@ -12,6 +13,7 @@ function UserSignup() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [msg, setMsg] = useState({type: 0, text: ''});
+    const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -24,21 +26,14 @@ function UserSignup() {
             email,
             password
         }).then((response) => {
-            if (response.status === 201) {
+            console.log(response);
+            if (response.status === 200) {
                 console.log('Usuario creado');
+                navigate('/login');
                 setMsg({type: 3, text: 'Usuario creado exitosamente'});
             }
         }).catch((error) => {
-            if (error.response.status === 400) {
-                console.log('Missing required fields');
-            }
-            else if (error.response.status === 406) {
-                console.log('Invalid credentials');
-            }
-            else if (error.response.status === 409) {
-                console.log('User already exists');
-                setMsg({type: 1, text: 'El usuario ya existe'});
-            }
+            setMsg({type: 1, text: 'Error al crear usuario'});
         });
     }
     return (
@@ -94,7 +89,7 @@ function UserSignup() {
                                 onChange={(e) => setEmail(e.target.value)}
                                 required
                             />
-                            {msg.type === 1 && <p className="error">{msg.text}</p>}
+                            
                             <input
                                 type="password"
                                 id="password"
@@ -104,9 +99,11 @@ function UserSignup() {
                                 onChange={(e) => setPassword(e.target.value)}
                                 required
                             />
+
                         </div>
+                        {msg.type === 1 && <p className="error">{msg.text}</p>}
                         {msg.type === 3 && <p className="success">{msg.text}</p>}
-                        <button onClick={handleSubmit} className="form-button">Crear cuenta</button>
+                        <button href='/' onClick={handleSubmit} className="form-button">Crear cuenta</button>
                         
                     </form>
             </div>

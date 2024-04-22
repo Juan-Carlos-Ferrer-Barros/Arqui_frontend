@@ -1,15 +1,16 @@
 import axios from 'axios';
 
-function sendAuthRequest(method, url, token) {
+function sendAuthRequest(method, url, token, body) {
     axios({
         method,
         url,
         headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `${token}`,
             // User: localStorage.getItem('userId')
-        }
+        },
+        data: body
     }).then((response) => {
-        return response.data;
+        console.log(response.data);
     }).catch((error) => {
         console.error(error);
     });

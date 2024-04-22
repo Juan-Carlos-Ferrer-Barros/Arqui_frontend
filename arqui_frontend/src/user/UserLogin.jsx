@@ -25,17 +25,12 @@ function UserLogin() {
                 setMsg({type: 2, text: 'Usuario no encontrado'});
             }
             if (response.data.access_token) {
-                login(response.data.access_token);
+                login(response.data.access_token, response.data.name);
                 navigate('/')
             }
             // console.error(response);
         }).catch((error) => {
-            if (error.response.status === 403) {
-                setMsg({type: 1, text: 'Contraseña incorrecta'});
-            }
-            else if (error.response.status === 404) {
-                setMsg({type: 2, text: 'Usuario no encontrado'});
-            }
+            setMsg({type: 1, text: 'Credenciales inválidas'});
         });
     }
     return (
@@ -60,7 +55,6 @@ function UserLogin() {
                                 onChange={(e) => setEmail(e.target.value)}
                                 required
                             />
-                            {msg.type === 2 && <p className="error">{msg.text}</p>}
                             <input
                                 type="password"
                                 id="password"

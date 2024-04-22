@@ -1,6 +1,23 @@
 import './Ticket.css'
+import { useState, useEffect } from 'react'
+import axios from 'axios';
 
 function MisVuelos() {
+
+    const token = localStorage.getItem('token');
+
+    useEffect(() => {
+        // Realizar la llamada a la API para obtener la información del vuelo seleccionado
+        axios.get(`https://api.nukor.xyz/requests`, {headers: {
+            Authorization: `Bearer ${token}`,
+        }})
+            .then(response => {
+                console.log(response.data); // Suponiendo que la respuesta contiene la información del vuelo
+            })
+            .catch(error => {
+                console.error('Error fetching flight information:', error);
+            });
+    }, []);
 
     const flightss = {"flights": [
         {"_id":"661485cebd518fd34878e1fd","flights":[{"departure_airport":{"name":"Aeropuerto de Roma-Fiumicino","id":"FCO","time":"2024-04-16 13:00"},"arrival_airport":{"name":"Aeropuerto Internacional de São Paulo-Guarulhos","id":"GRU","time":"2024-04-16 19:40"},"duration":700,"airplane":"Boeing 787","airline":"LATAM","airline_logo":"https://www.gstatic.com/flights/airline_logos/70px/LA.png"}],"price":379971,"carbonEmission":{"this_flight":659000},"airlineLogo":"https://www.gstatic.com/flights/airline_logos/70px/LA.png","currency":"CLP","createdAt":"2024-04-09T00:03:26.975Z","lastUpdate":"2024-04-09T00:03:26.975Z","availableSeats":90},

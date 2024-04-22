@@ -6,12 +6,17 @@ import { AuthContext } from '../auth/AuthContext';
 
 function Navbar() {
   const token = localStorage.getItem('token');
+  const name = localStorage.getItem('name');
   const [isLogged, setIsLogged] = useState(token !== "null");
   const { logout } = useContext(AuthContext);
 
   useEffect(() => {
     setIsLogged(localStorage.getItem('token') !== "null");
   }, [token]);
+
+  useEffect(() => {
+    setIsLogged(localStorage.getItem('name') !== "null");
+  }, [name]);
 
   const handleLogout = () => {
     setIsLogged(false);
@@ -53,7 +58,7 @@ function Navbar() {
           </li>
           : 
           <li className="navbar-item">
-            <button onClick={handleLogout} className="navbar-button">Cerrar Sesión</button>
+            <button onClick={handleLogout} className="navbar-button">{name}</button>
           </li>
         }
       </ul>

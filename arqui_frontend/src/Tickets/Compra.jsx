@@ -4,11 +4,13 @@ import axios from 'axios';
 import './Compra.css'
 import DarkLogo from '../assets/darklogo.png' 
 import Arrow from '../assets/arrow.png'
+import sendAuthRequest from '../auth/authRequest';
 
 function Compra() {
     const { flightId } = useParams(); // Suponiendo que flightId es el parámetro que identifica el vuelo seleccionado
     const [flightInfo, setFlightInfo] = useState(null);
     const [cantidadPasajes, setCantidadPasajes] = useState(1);
+    const token = localStorage.getItem('token');
 
     const handleChange = (event) => {
         const newValue = event.target.value;
@@ -38,19 +40,16 @@ function Compra() {
 
     const realizarCompra = () => {
         const datosCompra = {
-            flightId: flightId,
+            flight_id: flightId,
             quantity: cantidadPasajes
         };
+
+        console.log(datosCompra);
+
+        sendAuthRequest('POST', 'https://api.nukor.xyz/request', token, datosCompra);
     
         // Realizar la solicitud POST a la API con los datos de la compra
-        axios.post(`https://api.nukor.xyz/request`, datosCompra)
-            .then(response => {
-                // Manejar la respuesta si es necesario
-                console.log('Compra realizada con éxito:', response.data);
-            })
-            .catch(error => {
-                console.error('Error al realizar la compra:', error);
-            });
+        
     };
 
     return (

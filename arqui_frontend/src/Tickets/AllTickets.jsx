@@ -2,7 +2,7 @@ import './Ticket.css'
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link , useNavigate } from 'react-router-dom';
 
 
 
@@ -11,6 +11,10 @@ function AllTickets() {
     let { formDeparture, formArrival, formDate } = useParams();
 
     const hasParams = formDeparture && formArrival && formDate;
+    const navigate = useNavigate();
+
+    const token = localStorage.getItem('token');
+    const [isLogged, setIsLogged] = useState(token !== "null");
 
     const [flights, setFlights] = useState([]);
     const daysOfWeek = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
@@ -93,10 +97,13 @@ function AllTickets() {
         setDisplayedDays(getDisplayedDays());
     }, [selectedDate, currentPage]);
 
-    // Función para avanzar un día
-    
-
-    // Función para retroceder un día
+    const realizarPosibleCompra = (flight) => {
+        if (!isLogged) {
+            alert("Debe iniciar sesión para comprar.");
+        } else {
+            navigate(`/compra/${flight._id}`);
+        }
+    };
     
 
     return (
@@ -131,9 +138,7 @@ function AllTickets() {
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                     <p className='tipo'>Directo</p>
                     {selectedFlight === index && (
-                        <Link
-                            to={`/compra/${flight._id}`}
-                        ><button className='buy-ticket'>Comprar pasaje</button></Link>
+                        <button className='buy-ticket' onClick={() => realizarPosibleCompra(flight)}>Comprar pasaje</button>
                     )}
                 </div>
             </div>
