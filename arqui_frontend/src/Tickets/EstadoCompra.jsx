@@ -12,24 +12,19 @@ function EstadoCompras() {
             headers: { Authorization: `${token}` }
         })
         .then(response => {
+            console.log(response.data, "aca");
             setRequests(response.data); // Asumiendo que response.data es un arreglo de vuelos
-            console.log(response.data);
         })
         .catch(error => {
             console.error('Error fetching flight information:', error);
         });
     }, []);
 
-    useEffect(() => {
-        if (!token) {
-            window.location.reload();
-        }
-    }, [token]);
 
     return (
         <div className='scroll'>
             <h1 className='titleNoNavbar'>Mis Compras</h1>
-
+        
             {requests.map((request, index) => (
                 <div key={index} className='ticket-container' style={{ top: `${330 + index * 200}px` }}>
                     <div className='ticket-distribución'>
