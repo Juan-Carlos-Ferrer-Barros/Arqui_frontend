@@ -8,7 +8,7 @@ import MisVuelos from '../Tickets/MisVuelos'
 import AllTickets from '../Tickets/AllTickets'
 import Compra from '../Tickets/Compra'
 import EstadoCompras from "../Tickets/EstadoCompra"
-// import PrivateRoute from "../auth/PrivateRoute"
+import PrivateRoute from "../auth/PrivateRoute"
 
 export default function Routing(){
     
@@ -22,8 +22,10 @@ export default function Routing(){
                 <Route path={'/login'} element={<UserLogin />}/>
                 <Route path={'/signup'} element={<UserSignup />}/>
                 <Route path={'/ticket/flights/:formDeparture/:formArrival/:formDate'} element={<><Navbar /><Ticket /></>}/>
-                <Route path={'/tickets'} element={<><Navbar /><AllTickets /></>}/> 
-                <Route path={'/misvuelos'} element={<><Navbar /><MisVuelos /></>}/>
+                <Route path={'/tickets'} element={<><Navbar /><AllTickets /></>}/>
+                {/* <Route path={'/misvuelos'} element={<><Navbar /><MisVuelos /></>}/> */}
+                {/* PrivateRoute es una ruta que solo se accede si esta loggeado */}
+                <Route path={'/misvuelos'} element={<PrivateRoute element={<><Navbar /><MisVuelos /></>} />}/> 
                 <Route path={'/estadocompras'} element={<><Navbar /><EstadoCompras /></>}/>
                 <Route path={'/compra/:flightId'} element={<><Navbar /><Compra /></>}/>
                 <Route path={'*'} element={<h1>Page not found</h1>}/>
