@@ -11,11 +11,11 @@ import EstadoCompras from "../Tickets/EstadoCompra"
 import PrivateRoute from "../auth/PrivateRoute"
 
 export default function Routing(){
-    
-    
+
+
     return (
         <>
-        
+
         <BrowserRouter>
             <Routes>
                 <Route path={'/'} element={<><Navbar /><Landing/></>}/>
@@ -25,7 +25,7 @@ export default function Routing(){
                 <Route path={'/tickets'} element={<><Navbar /><AllTickets /></>}/>
                 {/* <Route path={'/misvuelos'} element={<><Navbar /><MisVuelos /></>}/> */}
                 {/* PrivateRoute es una ruta que solo se accede si esta loggeado */}
-                <Route path={'/misvuelos'} element={<PrivateRoute element={<><Navbar /><MisVuelos /></>} />}/> 
+                <Route path={'/misvuelos'} element={<PrivateRoute element={<><Navbar /><MisVuelos /></>} />}/>
                 <Route path={'/estadocompras'} element={<><Navbar /><EstadoCompras /></>}/>
                 <Route path={'/compra/:flightId'} element={<><Navbar /><Compra /></>}/>
                 <Route path={'*'} element={<h1>Page not found</h1>}/>

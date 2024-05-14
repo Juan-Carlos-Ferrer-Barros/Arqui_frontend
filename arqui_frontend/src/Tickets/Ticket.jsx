@@ -54,7 +54,7 @@ function Ticket() {
 
     const [currentPage, setCurrentPage] = useState(1);
 
-    
+
     // {url}/flights?departure={departure}&arrival={arrival}&date={date}
 
     useEffect(() => {
@@ -124,20 +124,20 @@ function Ticket() {
     return (
     <div className='scroll'>
         <div className='secondNavbar'>
-            <button> 
-                <img src={departure} alt="Logo" className="leftairplane-container"/> {formDeparture}      
+            <button>
+                <img src={departure} alt="Logo" className="leftairplane-container"/> {formDeparture}
                 <img src={arrival} alt="Logo" className="rightairplane-container"/> {formArrival}
             </button>
             <span className='separador'></span>
-            <button> 
+            <button>
                 <img src={dateLogo} alt="Logo" className="date-container"/> {formDate}
             </button>
             <span className='separador'></span>
-            <button> 
+            <button>
                 <img src={person} alt="Logo" className="icon-container"/> Cantidad pasajes
             </button>
             <span className='separador'></span>
-            <button> 
+            <button>
                 <img src={seat} alt="Logo" className="icon-container"/> Economy
             </button>
         </div>
@@ -153,7 +153,7 @@ function Ticket() {
                 </>
                 ))}
         </div>
-        
+
         {flights.map((flight, index) => (
             <button>
             <div key={index} className={`ticket-container ${selectedFlight === index ? 'selected' : ''}`} onClick={() => setSelectedFlight(index)} style={{ top: `${490 + index * 200}px` }}>
@@ -177,7 +177,7 @@ function Ticket() {
             </div>
             </button>
         ))}
-    
+
     <div className='pagecontainer' style={{ top: `${490 + flights.length * 200}px` }}>
             <button onClick={prevPage} disabled={currentPage === 1}>Anterior</button>
              <span className='separador'></span>

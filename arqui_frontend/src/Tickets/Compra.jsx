@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import './Compra.css'
-import DarkLogo from '../assets/darklogo.png' 
+import DarkLogo from '../assets/darklogo.png'
 import Arrow from '../assets/arrow.png'
 import sendAuthRequest from '../auth/authRequest';
 import { useNavigate } from 'react-router-dom';
@@ -24,9 +24,9 @@ function Compra() {
         }
         else if (newValue > 4) {
             setCantidadPasajes(4);
-        }   
+        }
     }
-        
+
 
 
     useEffect(() => {
@@ -38,14 +38,14 @@ function Compra() {
             .catch(error => {
                 console.error('Error fetching flight information:', error);
             });
-    }, [flightId]);   
+    }, [flightId]);
 
     const realizarCompra = () => {
         const datosCompra = {
             flight_id: flightId,
             quantity: cantidadPasajes
         };
-        
+
         if (flightInfo.available_seats <  cantidadPasajes){
             alert("No quedan asientos disponibles")
             navigate('/tickets');
@@ -57,9 +57,9 @@ function Compra() {
 
             sendAuthRequest('POST', 'https://api.nukor.xyz/request', token, datosCompra);
         }
-    
+
         // Realizar la solicitud POST a la API con los datos de la compra
-        
+
     };
 
     return (
@@ -91,12 +91,12 @@ function Compra() {
                                     </div>
                                     <div className='informacion-flex-left-text'>Total a pagar: </div> <div className='precio'> CLP {flightInfo.price * cantidadPasajes} </div>
                                 </div>
-                            
-                            
-                                
+
+
+
                             </div>
-                        
-                        
+
+
                         <button className='comprar-pasaje' onClick={() => realizarCompra()}>Confirmar compra</button>
                         {/* Agrega aquí cualquier otra información que desees mostrar */}
                     </div>
@@ -104,7 +104,7 @@ function Compra() {
                 <p>Cargando información del vuelo...</p>
             )}
 
-            
+
         </div>
     );
 }

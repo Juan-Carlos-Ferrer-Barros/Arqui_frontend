@@ -16,7 +16,7 @@ const Landing = () => {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-  
+
   return (
     <div>
       <div>
@@ -25,8 +25,8 @@ const Landing = () => {
       <div className='search-box'>
         <h1>Buscar vuelos</h1>
         <form action="/ticket/flights" method="get" className='search-form'>
-          <input type='text' placeholder='Origen' name ='formDeparture' onChange={handleChange}/> 
-          <input type='text' placeholder='Destino' name ='formArrival' onChange={handleChange}/> 
+          <input type='text' placeholder='Origen' name ='formDeparture' onChange={handleChange}/>
+          <input type='text' placeholder='Destino' name ='formArrival' onChange={handleChange}/>
           <input type='date' placeholder='Fecha' name ='formDate' onChange={handleChange}/>
           <Link
                 to={`/ticket/flights/${formData.formDeparture}/${formData.formArrival}/${formData.formDate}`}
@@ -49,9 +49,9 @@ const Landing = () => {
         </div>
       </div>
 
-    
+
     </div>
-    
+
   );
 };
 

@@ -89,7 +89,7 @@ function UserSignup() {
                                 onChange={(e) => setEmail(e.target.value)}
                                 required
                             />
-                            
+
                             <input
                                 type="password"
                                 id="password"
@@ -104,7 +104,7 @@ function UserSignup() {
                         {msg.type === 1 && <p className="error">{msg.text}</p>}
                         {msg.type === 3 && <p className="success">{msg.text}</p>}
                         <button href='/' onClick={handleSubmit} className="form-button">Crear cuenta</button>
-                        
+
                     </form>
             </div>
         </div>
@@ -113,7 +113,7 @@ function UserSignup() {
 }
 
 
-    
+
 
 
 export default UserSignup;

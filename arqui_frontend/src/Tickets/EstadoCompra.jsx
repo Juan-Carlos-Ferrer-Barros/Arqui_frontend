@@ -24,7 +24,7 @@ function EstadoCompras() {
     return (
         <div className='scroll'>
             <h1 className='titleNoNavbar'>Mis Compras</h1>
-        
+
             {requests.map((request, index) => (
                 <div key={index} className='ticket-container' style={{ top: `${330 + index * 200}px` }}>
                     <div className='ticket-distribución'>

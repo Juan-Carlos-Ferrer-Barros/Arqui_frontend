@@ -52,11 +52,11 @@ function Navbar() {
         <li className='navbar-text'>
             <a href='/estadocompras'><button> Estado de compra</button></a>
         </li>
-        {!isLogged ? 
+        {!isLogged ?
           <li className="navbar-item">
             <a href='/login'><button className="navbar-button">Iniciar Sesión</button></a>
           </li>
-          : 
+          :
           <li className="navbar-item">
             <button onClick={handleLogout} className="navbar-button">{name}</button>
           </li>

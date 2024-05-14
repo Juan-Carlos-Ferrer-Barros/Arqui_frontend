@@ -48,7 +48,7 @@ function AllTickets() {
     const [currentPage, setCurrentPage] = useState(1);
     const [selectedFlight, setSelectedFlight] = useState(null);
 
-    
+
     // {url}/flights?departure={departure}&arrival={arrival}&date={date}
 
     useEffect(() => {
@@ -104,7 +104,7 @@ function AllTickets() {
             navigate(`/compra/${flight._id}`);
         }
     };
-    
+
 
     return (
     <div className='scroll'>
@@ -120,7 +120,7 @@ function AllTickets() {
                 </>
                 ))}
         </div>
-        
+
         {flights.map((flight, index) => (
             <button>
             <div key={index} className={`ticket-container ${selectedFlight === index ? 'selected' : ''}`} onClick={() => setSelectedFlight(index)} style={{ top: `${410 + index * 200}px` }}>
@@ -144,7 +144,7 @@ function AllTickets() {
             </div>
             </button>
         ))}
-    
+
     <div className='pagecontainer' style={{ top: `${360 + flights.length * 200}px` }}>
             <button onClick={prevPage} disabled={currentPage === 1}>Anterior</button>
              <span className='separador'></span>

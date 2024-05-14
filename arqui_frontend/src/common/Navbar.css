@@ -11,8 +11,8 @@
 .navbar-list {
   list-style: none;
   padding: 0;
-  display: flex; 
-  justify-content: space-around; 
+  display: flex;
+  justify-content: space-around;
 }
 
 .navbar-item {
@@ -75,7 +75,7 @@
   border: 0px solid #333;
   padding: 10px;
   min-width: 160px;
-  
+
   z-index: 2;
 }
 
