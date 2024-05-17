@@ -6,11 +6,14 @@ import DarkLogo from '../assets/darklogo.png'
 import Arrow from '../assets/arrow.png'
 import sendAuthRequest from '../auth/authRequest';
 import { useNavigate } from 'react-router-dom';
+import webpayImage from '../assets/webpay.png';
 
 function Compra() {
     const { flightId } = useParams(); // Suponiendo que flightId es el parámetro que identifica el vuelo seleccionado
     const [flightInfo, setFlightInfo] = useState(null);
     const [cantidadPasajes, setCantidadPasajes] = useState(1);
+    const [showButton, setShowButton] = useState(false);
+    const [webpayUrl, setWebpayUrl] = useState('');
     const token = localStorage.getItem('token');
     const navigate = useNavigate();
 
@@ -51,15 +54,12 @@ function Compra() {
             navigate('/tickets');
         }
         else {
-            navigate('/');
-
+            // navigate('/'); // TODO:!! replace with display webpay form button
+            setShowButton(true);
             console.log(datosCompra);
-
             sendAuthRequest('POST', 'https://api.nukor.xyz/request', token, datosCompra);
+            // send to Webpay form
         }
-
-        // Realizar la solicitud POST a la API con los datos de la compra
-
     };
 
     return (
@@ -91,14 +91,15 @@ function Compra() {
                                     </div>
                                     <div className='informacion-flex-left-text'>Total a pagar: </div> <div className='precio'> CLP {flightInfo.price * cantidadPasajes} </div>
                                 </div>
-
-
-
                             </div>
 
-
-                        <button className='comprar-pasaje' onClick={() => realizarCompra()}>Confirmar compra</button>
-                        {/* Agrega aquí cualquier otra información que desees mostrar */}
+                        {showButton ? (
+                            <>
+                                <h1 className='notice'>Complete su compra a través de Webpay:</h1>
+                                <img className='logo' src={webpayImage} alt='Webpay logo' />
+                                <button className='comprar-pasaje' onClick={() => navigate('/webpay')}>Pagar con Webpay</button>
+                            </>
+                        ) : <button className='comprar-pasaje' onClick={() => realizarCompra()}>Confirmar compra</button>}
                     </div>
             ) : (
                 <p>Cargando información del vuelo...</p>
