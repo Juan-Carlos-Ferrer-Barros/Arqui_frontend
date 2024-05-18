@@ -1,20 +1,21 @@
 import axios from 'axios';
 
-function sendAuthRequest(method, url, token, body) {
-    axios({
-        method,
-        url,
-        headers: {
-            Authorization: `${token}`,
-            // User: localStorage.getItem('userId')
-        },
-        data: body
-    }).then((response) => {
-        console.log(response.data);
+async function sendAuthRequest(method, url, token, body) {
+    try {
+        const response = await axios({
+            method,
+            url,
+            headers: {
+                Authorization: `${token}`,
+                // User: localStorage.getItem('userId')
+            },
+            data: body
+        });
         return response.data;
-    }).catch((error) => {
-        console.error(error);
-    });
+    } catch (error) {
+        console.error('Error making request:', error);
+        throw error;
+    }
 }
 
 export default sendAuthRequest;

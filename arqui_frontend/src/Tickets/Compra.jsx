@@ -8,12 +8,14 @@ import sendAuthRequest from '../auth/authRequest';
 import { useNavigate } from 'react-router-dom';
 import webpayImage from '../assets/webpay.png';
 
+
 function Compra() {
     const { flightId } = useParams(); // Suponiendo que flightId es el parámetro que identifica el vuelo seleccionado
     const [flightInfo, setFlightInfo] = useState(null);
     const [cantidadPasajes, setCantidadPasajes] = useState(1);
     const [showButton, setShowButton] = useState(false);
     const [webpayUrl, setWebpayUrl] = useState('');
+    const [webpayToken, setWebpayToken] = useState('');
     const token = localStorage.getItem('token');
     const navigate = useNavigate();
 
@@ -33,17 +35,16 @@ function Compra() {
 
 
     useEffect(() => {
-        // Realizar la llamada a la API para obtener la información del vuelo seleccionado
         axios.get(`https://api.nukor.xyz/flights/${flightId}`)
             .then(response => {
-                setFlightInfo(response.data); // Suponiendo que la respuesta contiene la información del vuelo
+                setFlightInfo(response.data);
             })
             .catch(error => {
                 console.error('Error fetching flight information:', error);
             });
     }, [flightId]);
 
-    const realizarCompra = () => {
+    const realizarCompra = async () => {
         const datosCompra = {
             flight_id: flightId,
             quantity: cantidadPasajes
@@ -54,13 +55,20 @@ function Compra() {
             navigate('/tickets');
         }
         else {
-            // navigate('/'); // TODO:!! replace with display webpay form button
             setShowButton(true);
             console.log(datosCompra);
-            sendAuthRequest('POST', 'https://api.nukor.xyz/request', token, datosCompra);
-            // send to Webpay form
+            const response = await sendAuthRequest('POST', 'https://api.nukor.xyz/request', token, datosCompra);
+            setWebpayUrl(response.redirect_url);
+            setWebpayToken(response.transaction_token);
+            console.log("RESPONSE: ", response);
+            // TODO: setWebpayUrl y setWebpayToken
         }
     };
+
+    const sendToWebpay = async () => {
+        console.log(response);
+        // redirect to webpay
+    }
 
     return (
         <div className='background-compra'>
