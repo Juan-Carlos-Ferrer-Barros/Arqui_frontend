@@ -58,16 +58,35 @@ function Compra() {
             setShowButton(true);
             console.log(datosCompra);
             const response = await sendAuthRequest('POST', 'https://api.nukor.xyz/request', token, datosCompra);
-            setWebpayUrl(response.redirect_url);
+            setWebpayUrl(response.payment_url);
             setWebpayToken(response.transaction_token);
             console.log("RESPONSE: ", response);
-            // TODO: setWebpayUrl y setWebpayToken
         }
     };
 
     const sendToWebpay = async () => {
-        console.log(response);
-        // redirect to webpay
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = webpayUrl;
+        form.target = '_blank';
+        const data = {
+            "token_ws": webpayToken,
+        };
+
+        const tokenInput = document.createElement('input');
+        tokenInput.type = 'hidden';
+        tokenInput.name = "token_ws";
+        tokenInput.value = webpayToken;
+        form.appendChild(tokenInput);
+
+        const submitAction = document.createElement('input');
+        submitAction.type = 'submit';
+        submitAction.value = 'Pagar con Webpay';
+        form.appendChild(submitAction);
+
+        document.body.appendChild(form);
+        form.submit();
+        document.body.removeChild(form);
     }
 
     return (
@@ -105,7 +124,7 @@ function Compra() {
                             <>
                                 <h1 className='notice'>Complete su compra a través de Webpay:</h1>
                                 <img className='logo' src={webpayImage} alt='Webpay logo' />
-                                <button className='comprar-pasaje' onClick={() => navigate('/webpay')}>Pagar con Webpay</button>
+                                <button className='comprar-pasaje' onClick={() => sendToWebpay()}>Pagar con Webpay</button>
                             </>
                         ) : <button className='comprar-pasaje' onClick={() => realizarCompra()}>Confirmar compra</button>}
                     </div>
