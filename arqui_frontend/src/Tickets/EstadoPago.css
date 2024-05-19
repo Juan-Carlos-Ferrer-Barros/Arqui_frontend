@@ -1,0 +1,12 @@
+.status-image {
+    width: 6rem;
+    height: 6rem;
+    margin-top: 2rem;
+}
+
+.status-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

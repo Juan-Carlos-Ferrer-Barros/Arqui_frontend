@@ -1,26 +1,38 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './Compra.css'
+import './EstadoPago.css'
 import DarkLogo from '../assets/darklogo.png'
-import Arrow from '../assets/arrow.png'
 import { useLocation } from 'react-router-dom';
 import Spinner from '../common/Spinner';
+import Check from '../assets/check.png';
+import Cross from '../assets/cross.png';
 
 
 function usePolling(callback, interval) {
+    const intervalIdRef = useRef(null);
+
     useEffect(() => {
-      const pollingInterval = setInterval(callback, interval);
-      return () => clearInterval(pollingInterval);
+      intervalIdRef.current = setInterval(callback, interval);
+
+      return () => clearInterval(intervalIdRef.current);
     }, [callback, interval]);
-}
+
+    const clearPolling = () => {
+      if (intervalIdRef.current) {
+        clearInterval(intervalIdRef.current);
+      }
+    };
+
+    return clearPolling;
+  }
 
 
 function Compra() {
-    const [showButton, setShowButton] = useState(false);
     const [webpayToken, setWebpayToken] = useState('');
     const [isResponseLoading, setIsResponseLoading] = useState(true);
-    const [paymentStatus, setPaymentStatus] = useState('pending'); // ['pending', 'approved', 'rejected'
+    const [paymentStatus, setPaymentStatus] = useState('pending');
     const authToken = localStorage.getItem('token');
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
@@ -33,18 +45,26 @@ function Compra() {
         }
     }, []);
 
-    usePolling(() => {
+    const clearPolling = usePolling(() => {
         if (webpayToken) {
-          axios.get(`https://api.nukor.xyz/transactions/${webpayToken}`, {
+          axios.get(`https://api.nukor.xyz/transaction/${webpayToken}`, {
             headers: {
               'Authorization': `Bearer ${webpayToken}`
             }
           })
           .then(response => {
-            if (response.data.status === 'approved') {
+            console.log('Transaction status:', response.data);
+            if (response.data.transactionStatus.status === 'AUTHORIZED' && response.data.transactionStatus.response_code === 0) {
               console.log('Transaction approved');
-              // Perform further actions here if needed
+              setPaymentStatus('approved');
+              clearPolling();
+            } else if (response.data.transactionStatus.status === 'FAILED' || response.data.transactionStatus.status === 'REVERSED') {
+              console.log('Transaction rejected');
+              setPaymentStatus('rejected');
+              clearPolling();
             }
+
+            setIsResponseLoading(false);
           })
           .catch(error => {
             console.error('Error checking transaction status:', error);
@@ -64,14 +84,21 @@ function Compra() {
                     <>
                         <hr className="line"/>
                         {paymentStatus === 'approved' && (
-                            <div className='info-vuelo'>Pago confirmado</div>
+                            <>
+                                <div className='status-container'>
+                                    <img src={Check} className='status-image' alt='check' />
+                                    <div className='info-vuelo'>Pago confirmado</div>
+                                </div>
+                            </>
                         )}
                         {paymentStatus === 'rejected' && (
-                            <div className='info-vuelo'>Pago rechazado</div>
+                            <>
+                                <div className='status-container'>
+                                    <img src={Cross} className='status-image' alt='cross' />
+                                    <div className='info-vuelo'>Pago rechazado</div>
+                                </div>
+                            </>
                         )}
-                        {/* <div className='info-text'> <img src={Arrow} alt="Logo" className="arrow-container" ></img>  </div>
-                        <div className='info-text-small'>minutos</div>
-                        <hr className="line"/> */}
                     </>
                 )}
             </div>
