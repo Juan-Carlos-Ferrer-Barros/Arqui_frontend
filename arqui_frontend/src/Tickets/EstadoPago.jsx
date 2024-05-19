@@ -88,6 +88,7 @@ function Compra() {
                                 <div className='status-container'>
                                     <img src={Check} className='status-image' alt='check' />
                                     <div className='info-vuelo'>Pago confirmado</div>
+                                    <Link to={'/estadocompras'}><button className='button'>Ver Mis Compras</button></Link>
                                 </div>
                             </>
                         )}
@@ -96,6 +97,7 @@ function Compra() {
                                 <div className='status-container'>
                                     <img src={Cross} className='status-image' alt='cross' />
                                     <div className='info-vuelo'>Pago rechazado</div>
+                                    <Link to={'/'}><button className='button'>Volver al Inicio</button></Link>
                                 </div>
                             </>
                         )}
