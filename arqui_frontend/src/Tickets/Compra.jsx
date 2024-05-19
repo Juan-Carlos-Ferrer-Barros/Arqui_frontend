@@ -7,6 +7,7 @@ import Arrow from '../assets/arrow.png'
 import sendAuthRequest from '../auth/authRequest';
 import { useNavigate } from 'react-router-dom';
 import webpayImage from '../assets/webpay.png';
+import Spinner from '../common/Spinner';
 
 
 function Compra() {
@@ -55,12 +56,12 @@ function Compra() {
             navigate('/tickets');
         }
         else {
-            setShowButton(true);
             console.log(datosCompra);
             const response = await sendAuthRequest('POST', 'https://api.nukor.xyz/request', token, datosCompra);
             setWebpayUrl(response.payment_url);
             setWebpayToken(response.transaction_token);
             console.log("RESPONSE: ", response);
+            setShowButton(true);
         }
     };
 
