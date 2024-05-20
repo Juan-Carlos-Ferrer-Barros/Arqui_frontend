@@ -19,10 +19,14 @@ jobs:
           node-version: '18'
 
       - name: Install dependencies
-        run: yarn ci
+        run: |
+        cd arqui_frontend/
+        yarn ci
 
       - name: Lint with yarn
-        run: yarn lint
+        run: |
+        cd arqui_frontend/
+        yarn lint
 
       - name: echo
         run: echo "Hello, world!"
