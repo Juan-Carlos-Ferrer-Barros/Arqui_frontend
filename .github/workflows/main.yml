@@ -20,14 +20,10 @@ jobs:
           cache: 'yarn'
 
       - name: Install dependencies
-        run: |
-        cd arqui_frontend/
-        yarn ci
+        run: yarn --cwd arqui_frontend ci
 
       - name: Lint with yarn
-        run: |
-        cd arqui_frontend/
-        yarn lint
+        run: yarn --cwd arqui_frontend lint
 
       - name: echo
         run: echo "Hello, world!"
