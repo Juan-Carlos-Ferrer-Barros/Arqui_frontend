@@ -20,10 +20,10 @@ jobs:
           cache: 'yarn'
 
       - name: Install dependencies
-        run: yarn --cwd arqui_frontend install --frozen-lockfile
+        run: yarn ci
 
       - name: Lint with yarn
-        run: yarn --cwd arqui_frontend lint
+        run: yarn lint
 
       - name: echo
         run: echo "Hello, world!"
