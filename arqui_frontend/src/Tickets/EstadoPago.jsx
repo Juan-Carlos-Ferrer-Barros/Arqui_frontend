@@ -31,6 +31,7 @@ function usePolling(callback, interval) {
 
 function Compra() {
     const [webpayToken, setWebpayToken] = useState('');
+    const [qToken, setQToken] = useState('');
     const [isResponseLoading, setIsResponseLoading] = useState(true);
     const [paymentStatus, setPaymentStatus] = useState('pending');
     const authToken = localStorage.getItem('token');
@@ -39,14 +40,17 @@ function Compra() {
 
     useEffect(() => {
         const token_ws = searchParams.get('token_ws');
-        if (token_ws) {
-            setWebpayToken(token_ws);
-            console.log('Webpay token:', token_ws);
+        const tbkToken = searchParams.get('TBK_TOKEN');
+        if (!token_ws) {
+          setIsResponseLoading(false);
+          setPaymentStatus('cancelled');
         }
+        setWebpayToken(token_ws || tbkToken);
+        console.log('Webpay token:', token_ws);
     }, []);
 
     const clearPolling = usePolling(() => {
-        if (webpayToken) {
+        if (webpayToken && isResponseLoading) {
           axios.get(`https://api.nukor.xyz/transaction/${webpayToken}`, {
             headers: {
               'Authorization': `Bearer ${webpayToken}`
@@ -92,11 +96,11 @@ function Compra() {
                                 </div>
                             </>
                         )}
-                        {paymentStatus === 'rejected' && (
+                        {(paymentStatus === 'rejected' || paymentStatus === 'cancelled') && (
                             <>
                                 <div className='status-container'>
                                     <img src={Cross} className='status-image' alt='cross' />
-                                    <div className='info-vuelo'>Pago rechazado</div>
+                                    <div className='info-vuelo'>{paymentStatus === 'rejected' ? 'Pago rechazado' : 'Pago anulado por usuario'}</div>
                                     <Link to={'/'}><button className='button'>Volver al Inicio</button></Link>
                                 </div>
                             </>
