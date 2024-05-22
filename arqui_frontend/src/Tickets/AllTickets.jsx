@@ -110,19 +110,20 @@ function AllTickets() {
     <div className='scroll'>
         <h1 className='titleNoNavbar'>Descubre nuestros vuelos</h1>
         <div className='datecontainerNoNavbar'>
-             <span className='separador'></span>
-             {displayedDays.map((day, index) => (
+            <span className='separador'></span>
+            {displayedDays.map((day, index) => (
                 <>
                     <button key={index} onClick={() => setSelectedDate(day)}>
                         {daysOfWeek[day.getDay()].slice(0, 3)}, {day.getDate()}-{day.getMonth() + 1}
                     </button>
                     <span className='separador'></span>
                 </>
-                ))}
+                )
+            )}
         </div>
 
         {flights.map((flight, index) => (
-            <button>
+            <button key={index}>
             <div key={index} className={`ticket-container ${selectedFlight === index ? 'selected' : ''}`} onClick={() => setSelectedFlight(index)} style={{ top: `${410 + index * 200}px` }}>
                 <div className='ticket-distribución'>
                     <h2>{flight.departure_time.slice(11, 16)} {flight.departure_airport_id}</h2>
