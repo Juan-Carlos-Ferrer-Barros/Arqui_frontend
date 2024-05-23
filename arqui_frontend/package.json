@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "s3": "aws s3 sync dist/ s3://entrega2 --delete",
     "//": "lint:fix: eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0 --fix",
     "lint": "eslint src/",
     "lint:fix": "eslint . --fix",

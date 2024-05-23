@@ -29,7 +29,7 @@ export default function Routing(){
                 {/* PrivateRoute es una ruta que solo se accede si esta loggeado */}
                 <Route path={'/misvuelos'} element={<PrivateRoute element={<><Navbar /><MisVuelos /></>} />}/>
                 <Route path={'/transaction'} element={<><Navbar/><EstadoPago /></>}/>
-                <Route path={'/estadocompras'} element={<><Navbar /><EstadoCompras /></>}/>
+                <Route path={'/estadocompras'} element={<PrivateRoute element={<><Navbar /><EstadoCompras /></>} />}/>
                 <Route path={'/compra/:flightId'} element={<><Navbar /><Compra /></>}/>
                 <Route path={'*'} element={<h1>Page not found</h1>}/>
             </Routes>
