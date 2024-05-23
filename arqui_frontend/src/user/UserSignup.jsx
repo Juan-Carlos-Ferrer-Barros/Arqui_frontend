@@ -19,7 +19,7 @@ function UserSignup() {
         event.preventDefault();
 
         console.log(1);
-        axios.post(`${import.meta.env.VITE_BACKEND_URL}/signup`, {
+        axios.post(`https://api.nukor.xyz/signup`, {
             rut,
             name,
             lastname,

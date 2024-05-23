@@ -38,6 +38,9 @@ function Navbar() {
             <a href='/misvuelos'><button> Mis viajes</button></a>
         </li>
         <li className='navbar-text'>
+            <a href='/recomendaciones'><button> Vuelos para mi</button></a>
+        </li>
+        <li className='navbar-text'>
             <button> Centro de ayuda</button>
         </li>
         <li></li>
