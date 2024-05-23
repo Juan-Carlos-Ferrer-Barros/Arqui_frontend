@@ -16,7 +16,7 @@ function UserLogin() {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        axios.post(`${import.meta.env.VITE_BACKEND_URL}/login`, {
+        axios.post(`https://api.nukor.xyz/login`, {
             email,
             password,
         }).then((response) => {
