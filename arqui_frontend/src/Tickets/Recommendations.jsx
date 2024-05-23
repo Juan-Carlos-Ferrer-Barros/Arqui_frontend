@@ -24,7 +24,7 @@ export default function Recommendations() {
     fetch('https://api.nukor.xyz/recommendations', {
       headers: { Authorization: `${token}` }
     })
-      .then(response => setFlights(response.json().flights))
+      .then(response => setFlights(response.json().flights || flights))
       .catch(error => console.error('Error fetching flight information:', error));
   }, []);
 
@@ -32,7 +32,9 @@ export default function Recommendations() {
     <div className='scroll'>
       <h1 className='titleNoNavbar'>Recomendaciones</h1>
 
-      {flights.map((flight, index) => (
+      { flights.length === 0 && <h1 className='titleNoNavbar'>------------------------</h1> }
+      { flights.length > 0 &&
+      flights.map((flight, index) => (
         <button key={index}>
           <div key={index} className={`ticket-container ${selectedFlight === index ? 'selected' : ''}`} onClick={() => setSelectedFlight(index)} style={{ top: `${490 + index * 200}px` }}>
             <div className='ticket-distribución'>
