@@ -6,11 +6,17 @@ import DarkLogo from '../assets/darklogo.png'
 import Arrow from '../assets/arrow.png'
 import sendAuthRequest from '../auth/authRequest';
 import { useNavigate } from 'react-router-dom';
+import webpayImage from '../assets/webpay.png';
+import Spinner from '../common/Spinner';
+
 
 function Compra() {
     const { flightId } = useParams(); // Suponiendo que flightId es el parámetro que identifica el vuelo seleccionado
     const [flightInfo, setFlightInfo] = useState(null);
     const [cantidadPasajes, setCantidadPasajes] = useState(1);
+    const [showButton, setShowButton] = useState(false);
+    const [webpayUrl, setWebpayUrl] = useState('');
+    const [webpayToken, setWebpayToken] = useState('');
     const token = localStorage.getItem('token');
     const navigate = useNavigate();
 
@@ -30,17 +36,16 @@ function Compra() {
 
 
     useEffect(() => {
-        // Realizar la llamada a la API para obtener la información del vuelo seleccionado
         axios.get(`https://api.nukor.xyz/flights/${flightId}`)
             .then(response => {
-                setFlightInfo(response.data); // Suponiendo que la respuesta contiene la información del vuelo
+                setFlightInfo(response.data);
             })
             .catch(error => {
                 console.error('Error fetching flight information:', error);
             });
     }, [flightId]);
 
-    const realizarCompra = () => {
+    const realizarCompra = async () => {
         const datosCompra = {
             flight_id: flightId,
             quantity: cantidadPasajes
@@ -51,16 +56,39 @@ function Compra() {
             navigate('/tickets');
         }
         else {
-            navigate('/');
-
             console.log(datosCompra);
-
-            sendAuthRequest('POST', 'https://api.nukor.xyz/request', token, datosCompra);
+            const response = await sendAuthRequest('POST', 'https://api.nukor.xyz/request', token, datosCompra);
+            setWebpayUrl(response.payment_url);
+            setWebpayToken(response.transaction_token);
+            console.log("RESPONSE: ", response);
+            setShowButton(true);
         }
-
-        // Realizar la solicitud POST a la API con los datos de la compra
-
     };
+
+    const sendToWebpay = async () => {
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = webpayUrl;
+        form.target = '_blank';
+        const data = {
+            "token_ws": webpayToken,
+        };
+
+        const tokenInput = document.createElement('input');
+        tokenInput.type = 'hidden';
+        tokenInput.name = "token_ws";
+        tokenInput.value = webpayToken;
+        form.appendChild(tokenInput);
+
+        const submitAction = document.createElement('input');
+        submitAction.type = 'submit';
+        submitAction.value = 'Pagar con Webpay';
+        form.appendChild(submitAction);
+
+        document.body.appendChild(form);
+        form.submit();
+        document.body.removeChild(form);
+    }
 
     return (
         <div className='background-compra'>
@@ -91,14 +119,15 @@ function Compra() {
                                     </div>
                                     <div className='informacion-flex-left-text'>Total a pagar: </div> <div className='precio'> CLP {flightInfo.price * cantidadPasajes} </div>
                                 </div>
-
-
-
                             </div>
 
-
-                        <button className='comprar-pasaje' onClick={() => realizarCompra()}>Confirmar compra</button>
-                        {/* Agrega aquí cualquier otra información que desees mostrar */}
+                        {showButton ? (
+                            <>
+                                <h1 className='notice'>Complete su compra a través de Webpay:</h1>
+                                <img className='logo' src={webpayImage} alt='Webpay logo' />
+                                <button className='comprar-pasaje' onClick={() => sendToWebpay()}>Pagar con Webpay</button>
+                            </>
+                        ) : <button className='comprar-pasaje' onClick={() => realizarCompra()}>Confirmar compra</button>}
                     </div>
             ) : (
                 <p>Cargando información del vuelo...</p>

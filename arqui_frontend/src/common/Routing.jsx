@@ -10,6 +10,7 @@ import Compra from '../Tickets/Compra'
 import EstadoCompras from "../Tickets/EstadoCompra"
 import PrivateRoute from "../auth/PrivateRoute"
 import Recommendations from "../Tickets/Recommendations"
+import EstadoPago from "../Tickets/EstadoPago"
 
 export default function Routing(){
 
@@ -37,6 +38,9 @@ export default function Routing(){
                 <Route path={'/compra/:flightId'} element={<Compra />}/>
                 <Route path={'/recomendaciones'} element={
                     <PrivateRoute element={Recommendations} />
+                }/>
+                <Route path={'/transaction'} element={
+                    <EstadoPago />
                 }/>
                 <Route path={'*'} element={<h1>Page not found</h1>}/>
             </Routes>

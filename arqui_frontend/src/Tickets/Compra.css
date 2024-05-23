@@ -34,6 +34,22 @@
 
 }
 
+.notice{
+    font-size: 3em;
+    line-height: 1.1;
+    font-family: 'Cooper Hewitt Thin', sans-serif;
+    color: #070b38;
+    text-align: center;
+    margin-top: 3rem;
+}
+
+.logo{
+    width: 20%;
+    height: 20%;
+    margin-left: 40%;
+    margin-top: 5%;
+}
+
 .info-vuelo {
     font-size: 1.5em;
     line-height: 1.1;
