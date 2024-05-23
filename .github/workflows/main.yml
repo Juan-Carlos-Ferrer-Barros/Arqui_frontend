@@ -20,7 +20,7 @@ jobs:
           cache: 'yarn'
 
       - name: Install dependencies
-        run: yarn --cwd arqui_frontend ci
+        run: yarn --cwd arqui_frontend install --frozen-lockfile
 
       - name: Lint with yarn
         run: yarn --cwd arqui_frontend lint
