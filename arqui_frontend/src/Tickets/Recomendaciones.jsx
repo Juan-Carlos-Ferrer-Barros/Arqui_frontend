@@ -11,6 +11,15 @@ function AllTickets() {
     const token = localStorage.getItem('token');
     const [isLogged, setIsLogged] = useState(token !== "null");
 
+    const nextPage = () => {
+        setCurrentPage(currentPage + 1);
+    };
+
+    // Función para ir a la página anterior
+    const prevPage = () => {
+        setCurrentPage(currentPage - 1);
+    };
+
     const realizarPosibleCompra = (flight) => {
         if (!isLogged) {
             alert("Debe iniciar sesión para comprar.");
@@ -55,14 +64,15 @@ function AllTickets() {
             </button>
         ))}
 
-    <div className='pagecontainer' style={{ top: `${360 + flights.length * 200}px` }}>
+    <div className='pagecontainer' style={{ top: `${490 + flights.length * 200}px` }}>
             <button onClick={prevPage} disabled={currentPage === 1}>Anterior</button>
              <span className='separador'></span>
              <button onClick={nextPage}>Siguiente</button>
     </div>
-    <div className='espacio'></div>
-</div>
+
+    </div>
     )
 }
+
 
 export default AllTickets;

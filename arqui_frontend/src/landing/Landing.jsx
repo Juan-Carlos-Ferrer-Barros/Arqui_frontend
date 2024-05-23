@@ -43,9 +43,9 @@ const Landing = () => {
       <div className='info-box'>
         <div className='info-buttons'>
           <button> Administra tu viaje</button>
-          <button> Revisa el estado de tu compra</button>
+          <a href= '/heartbeat'><button>Revisa el estado de los workers</button></a>
           <a href= '/tickets'><button>Todos los vuelos</button></a>
-          <button> Información de equipaje</button>
+          <button> Tus recomendaciones </button>
         </div>
       </div>
 

@@ -4,7 +4,7 @@ const Heartbeat = () => {
     const [data, setData] = useState(null);
 
     useEffect(() => {
-        fetch('https://workers.nukor.xyz/heartbeat')
+        fetch('/heartbeat')  // Matches the proxy key in vite.config.js
             .then(response => response.json())
             .then(data => setData(data))
             .catch(error => console.error('Error fetching data:', error));

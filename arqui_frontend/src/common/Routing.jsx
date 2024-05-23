@@ -9,6 +9,8 @@ import AllTickets from '../Tickets/AllTickets'
 import Compra from '../Tickets/Compra'
 import EstadoCompras from "../Tickets/EstadoCompra"
 import PrivateRoute from "../auth/PrivateRoute"
+import Heartbeat from "../common/Heartbeat"
+import Recomendaciones from "../Tickets/Recomendaciones"
 
 export default function Routing(){
 
@@ -29,6 +31,8 @@ export default function Routing(){
                 <Route path={'/estadocompras'} element={<PrivateRoute element={<><Navbar /><EstadoCompras /></>} />}/>
                 <Route path={'/compra/:flightId'} element={<><Navbar /><Compra /></>}/>
                 <Route path={'*'} element={<h1>Page not found</h1>}/>
+                <Route path={'/heartbeat'} element={<Heartbeat />} />
+                <Route path={'/recomendaciones'} element={<><Navbar /><Recomendaciones /></>}/>
             </Routes>
         </BrowserRouter>
         </>
