@@ -8,6 +8,7 @@ export default function Recommendations() {
 
   const token = localStorage.getItem('token');
   const isLogged = token !== "null";
+  const [flightIds, setFlightIds] = useState([]);
   const [flights, setFlights] = useState([]);
   const [selectedFlight, setSelectedFlight] = useState(null);
   const navigate = useNavigate();
@@ -24,9 +25,17 @@ export default function Recommendations() {
     fetch('https://api.nukor.xyz/recommendations', {
       headers: { Authorization: `${token}` }
     })
-      .then(response => setFlights(response.json().flights || flights))
+      .then(response => setFlightIds(response.json().flightIds || flightIds))
       .catch(error => console.error('Error fetching flight information:', error));
   }, []);
+
+  useEffect(() => {
+    flightIds.forEach(flightId => {
+      fetch(`https://api.nukor.xyz/flights/${flightId}`,)
+        .then(response => setFlights([...flights, response.json()]))
+        .catch(error => console.error('Error fetching flight information:', error));
+    });
+  }, [flightIds]);
 
   return (
     <div className='scroll'>
