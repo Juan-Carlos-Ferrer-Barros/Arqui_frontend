@@ -8,7 +8,7 @@ function EstadoCompras() {
     let [requests, setRequests] = useState([]);
 
     useEffect(() => {
-        axios.get(`https://api.nukor.xyz/requests`, {
+        axios.get(`https://dwsgg58z-3000.brs.devtunnels.ms/requests`, {
             headers: { Authorization: `${token}` }
         })
         .then(response => {

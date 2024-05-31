@@ -36,7 +36,7 @@ function Compra() {
 
 
     useEffect(() => {
-        axios.get(`https://api.nukor.xyz/flights/${flightId}`)
+        axios.get(`https://dwsgg58z-3000.brs.devtunnels.ms/flights/${flightId}`)
             .then(response => {
                 setFlightInfo(response.data);
             })
@@ -57,7 +57,7 @@ function Compra() {
         }
         else {
             console.log(datosCompra);
-            const response = await sendAuthRequest('POST', 'https://api.nukor.xyz/request', token, datosCompra);
+            const response = await sendAuthRequest('POST', 'https://dwsgg58z-3000.brs.devtunnels.ms/request', token, datosCompra);
             setWebpayUrl(response.payment_url);
             setWebpayToken(response.transaction_token);
             console.log("RESPONSE: ", response);
