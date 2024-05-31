@@ -8,7 +8,7 @@ function EstadoCompras() {
     const [requests, setRequests] = useState([]);
 
     useEffect(() => {
-        axios.get(`https://dwsgg58z-3000.brs.devtunnels.ms/requests`, {
+        axios.get(`localhost:3000/requests`, {
             headers: { Authorization: `${token}` }
         })
         .then(response => {

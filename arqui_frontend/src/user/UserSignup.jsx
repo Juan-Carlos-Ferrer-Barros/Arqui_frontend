@@ -19,7 +19,7 @@ function UserSignup() {
         event.preventDefault();
 
         console.log(1);
-        axios.post(`https://dwsgg58z-3000.brs.devtunnels.ms/signup`, {
+        axios.post(`localhost:3000/signup`, {
             rut,
             name,
             lastname,

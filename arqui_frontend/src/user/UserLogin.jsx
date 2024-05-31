@@ -16,7 +16,7 @@ function UserLogin() {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        axios.post(`https://dwsgg58z-3000.brs.devtunnels.ms/login`, {
+        axios.post(`localhost:3000/login`, {
             email,
             password,
         }).then((response) => {

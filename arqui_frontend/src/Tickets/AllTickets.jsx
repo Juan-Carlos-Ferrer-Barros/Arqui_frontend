@@ -52,7 +52,7 @@ function AllTickets() {
     // {url}/flights?departure={departure}&arrival={arrival}&date={date}
 
     useEffect(() => {
-        axios.get(`https://dwsgg58z-3000.brs.devtunnels.ms/flights?page=${currentPage}`)
+        axios.get(`localhost:3000/flights?page=${currentPage}`)
         .then(response => {
             setFlights(response.data.flights);
             //console.log(response.data.flights);
