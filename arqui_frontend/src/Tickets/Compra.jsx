@@ -36,7 +36,7 @@ function Compra() {
 
 
     useEffect(() => {
-        axios.get(`localhost:3000/flights/${flightId}`)
+        axios.get(`http://localhost:3000/flights/${flightId}`)
             .then(response => {
                 setFlightInfo(response.data);
             })
@@ -57,7 +57,13 @@ function Compra() {
         }
         else {
             console.log(datosCompra);
-            const response = await sendAuthRequest('POST', 'localhost:3000/request', token, datosCompra);
+            // const response = await sendAuthRequest('POST', 'localhost:3000/request', token, datosCompra);
+            const response = await axios.post('http://localhost:3000/request', {
+                headers: {
+                    Authorization: token,
+                },
+                body: datosCompra,
+            });    
             setWebpayUrl(response.payment_url);
             setWebpayToken(response.transaction_token);
             console.log("RESPONSE: ", response);

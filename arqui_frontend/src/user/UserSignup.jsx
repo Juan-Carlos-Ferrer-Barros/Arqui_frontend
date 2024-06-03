@@ -19,7 +19,7 @@ function UserSignup() {
         event.preventDefault();
 
         console.log(1);
-        axios.post(`localhost:3000/signup`, {
+        axios.post(`http://localhost:8000/signup`, {
             rut,
             name,
             lastname,

@@ -8,7 +8,7 @@ function EstadoCompras() {
     let [requests, setRequests] = useState([]);
 
     useEffect(() => {
-        axios.get(`localhost:3000/requests`, {
+        axios.get(`http://localhost:3000/requests`, {
             headers: { Authorization: `${token}` }
         })
         .then(response => {

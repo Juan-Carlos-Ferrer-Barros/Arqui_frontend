@@ -51,7 +51,7 @@ function Compra() {
 
     const clearPolling = usePolling(() => {
         if (webpayToken && isResponseLoading) {
-          axios.get(`localhost:3000/transaction/${webpayToken}`, {
+          axios.get(`http://localhost:3000/transaction/${webpayToken}`, {
             headers: {
               'Authorization': `Bearer ${webpayToken}`
             }
