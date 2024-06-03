@@ -52,7 +52,7 @@ function AllTickets() {
     // {url}/flights?departure={departure}&arrival={arrival}&date={date}
 
     useEffect(() => {
-        axios.get(`localhost:3000/flights?page=${currentPage}`)
+        axios.get(`http://localhost:3000/flights?page=${currentPage}`)
         .then(response => {
             setFlights(response.data.flights);
             //console.log(response.data.flights);
