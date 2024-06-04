@@ -16,7 +16,7 @@ function UserLogin() {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        axios.post(`https://dwsgg58z-3000.brs.devtunnels.ms/login`, {
+        axios.post(`${import.meta.env.VITE_AUTH_URL}/login`, {
             email,
             password,
         }).then((response) => {

@@ -5,7 +5,6 @@ import axios from 'axios';
 import { Link , useNavigate } from 'react-router-dom';
 
 
-
 function AllTickets() {
 
     let { formDeparture, formArrival, formDate } = useParams();
@@ -52,7 +51,7 @@ function AllTickets() {
     // {url}/flights?departure={departure}&arrival={arrival}&date={date}
 
     useEffect(() => {
-        axios.get(`https://dwsgg58z-3000.brs.devtunnels.ms/flights?page=${currentPage}`)
+        axios.get(`${import.meta.env.VITE_API_URL}/flights?page=${currentPage}`)
         .then(response => {
             setFlights(response.data.flights);
             //console.log(response.data.flights);

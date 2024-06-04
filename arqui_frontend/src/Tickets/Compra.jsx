@@ -36,7 +36,7 @@ function Compra() {
 
 
     useEffect(() => {
-        axios.get(`https://dwsgg58z-3000.brs.devtunnels.ms/flights/${flightId}`)
+        axios.get(`${import.meta.env.VITE_API_URL}/flights/${flightId}`)
             .then(response => {
                 setFlightInfo(response.data);
             })
@@ -57,7 +57,13 @@ function Compra() {
         }
         else {
             console.log(datosCompra);
-            const response = await sendAuthRequest('POST', 'https://dwsgg58z-3000.brs.devtunnels.ms/request', token, datosCompra);
+            // const response = await sendAuthRequest('POST', 'localhost:3000/request', token, datosCompra);
+            const response = await axios.post(`${import.meta.env.VITE_API_URL}/request`, {
+                headers: {
+                    Authorization: token,
+                },
+                body: datosCompra,
+            });    
             setWebpayUrl(response.payment_url);
             setWebpayToken(response.transaction_token);
             console.log("RESPONSE: ", response);
