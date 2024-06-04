@@ -16,7 +16,7 @@ function UserLogin() {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        axios.post(`http://localhost:8000/login`, {
+        axios.post(`${import.meta.env.VITE_AUTH_URL}/login`, {
             email,
             password,
         }).then((response) => {

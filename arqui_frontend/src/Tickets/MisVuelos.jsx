@@ -8,7 +8,7 @@ function EstadoCompras() {
     const [requests, setRequests] = useState([]);
 
     useEffect(() => {
-        axios.get(`http://localhost:3000/requests`, {
+        axios.get(`${import.meta.env.VITE_API_URL}/requests`, {
             headers: { Authorization: `${token}` }
         })
         .then(response => {

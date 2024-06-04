@@ -36,7 +36,7 @@ function Compra() {
 
 
     useEffect(() => {
-        axios.get(`http://localhost:3000/flights/${flightId}`)
+        axios.get(`${import.meta.env.VITE_API_URL}/flights/${flightId}`)
             .then(response => {
                 setFlightInfo(response.data);
             })
@@ -58,7 +58,7 @@ function Compra() {
         else {
             console.log(datosCompra);
             // const response = await sendAuthRequest('POST', 'localhost:3000/request', token, datosCompra);
-            const response = await axios.post('http://localhost:3000/request', {
+            const response = await axios.post(`${import.meta.env.VITE_API_URL}/request`, {
                 headers: {
                     Authorization: token,
                 },

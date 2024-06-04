@@ -22,7 +22,7 @@ export default function Recommendations() {
   };
 
   useEffect(() => {
-    fetch('http://localhost:3000/recommendations', {
+    fetch(`${import.meta.env.VITE_API_URL}/recommendations`, {
       headers: { Authorization: `${token}` }
     })
       .then(response => setFlightIds(response.json().flightIds || flightIds))
@@ -31,7 +31,7 @@ export default function Recommendations() {
 
   useEffect(() => {
     flightIds.forEach(flightId => {
-      fetch(`http://localhost:3000/flights/${flightId}`,)
+      fetch(`${import.meta.env.VITE_API_URL}/flights/${flightId}`,)
         .then(response => setFlights([...flights, response.json()]))
         .catch(error => console.error('Error fetching flight information:', error));
     });

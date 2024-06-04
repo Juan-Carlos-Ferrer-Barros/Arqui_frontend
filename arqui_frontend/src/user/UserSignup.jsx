@@ -19,7 +19,7 @@ function UserSignup() {
         event.preventDefault();
 
         console.log(1);
-        axios.post(`http://localhost:8000/signup`, {
+        axios.post(`${import.meta.env.VITE_AUTH_URL}/signup`, {
             rut,
             name,
             lastname,
