@@ -63,9 +63,10 @@ function Compra() {
                     Authorization: token,
                 },
                 body: datosCompra,
-            });    
-            setWebpayUrl(response.payment_url);
-            setWebpayToken(response.transaction_token);
+            });
+            console.log(response.data.transaction_token)
+            setWebpayUrl(response.data.payment_url);
+            setWebpayToken(response.data.transaction_token);
             console.log("RESPONSE: ", response);
             setShowButton(true);
         }
