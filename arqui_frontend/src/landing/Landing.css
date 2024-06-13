@@ -1,69 +1,131 @@
-body, html {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  font-family: Arial, sans-serif; /* Utiliza una fuente más común */
+
+.plane-image {
+  width: 100%;
+  left: 0;
+  top: 105px;
+  position: absolute;
 }
 
-.landing {
-  height: 100%;
+
+.search-box {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  width: 70%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.search-form {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
-  animation: Gradient 15s ease infinite;
 }
 
-.hero {
-  text-align: center;
-  color: #fff;
-  margin-bottom: 50px; /* Espaciado inferior para separar del siguiente contenido */
-}
-
-.features {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.feature {
-  text-align: center;
-  color: #fff;
-  margin: 20px;
-  padding: 20px;
-  background-color: rgba(255, 255, 255, 0.1); /* Fondo semi-transparente */
-  border-radius: 10px;
-}
-
-.btn {
-  padding: 15px 30px;
-  margin: 10px;
-  color: #fff;
-  font-family: Arial, sans-serif;
-  text-transform: uppercase;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  border: 2px solid #fff;
+.search-form input {
+  width: 50%;
+  margin-right: 30px;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid #ccc;
   border-radius: 5px;
-  transition: background-color 0.3s ease, border-color 0.3s ease;
+  color: #070b38;
 }
 
-.btn:hover {
-  background-color: rgba(255, 255, 255, 0.1); /* Cambio de color al pasar el mouse */
+.search-form button {
+  padding: 9px 20px;
+  background-color: rgb(242, 6, 65);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
-/* Estilos de la animación de gradiente */
-@keyframes Gradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+.form-group {
+  margin-bottom: 10px;
 }
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #911040;
+}
+
+.anuncios {
+  position: absolute;
+  top: 65%;
+  left: 50%;
+  width: 45%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 1);
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+}
+
+.anuncios img {
+  float: right;
+  margin-left: 10px;
+  width: 300px;
+}
+
+.anuncios-text {
+  overflow: hidden;
+}
+
+.info-box {
+  position: absolute;
+  top: 95%;
+  left: 50%;
+  width: 70%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.info-buttons button{
+  display: inline-block;
+  margin-right: 20px;
+  background-color: rgba(255, 255, 255, 0.8);
+  color: #0c1361;
+  border: 1px solid #0c1361;
+  border-radius: 5px;
+  padding: 10px 20px;
+  max-width: 30%;
+}
+
+.info-buttons button:hover {
+  background-color: #0c1361;
+  color: #fff;
+}
+
+
+
