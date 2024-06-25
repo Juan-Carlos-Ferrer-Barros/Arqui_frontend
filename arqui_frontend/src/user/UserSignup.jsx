@@ -12,7 +12,7 @@ function UserSignup() {
     const [lastname, setLastname] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [msg, setMsg] = useState({type: 0, text: ''});
+    const [msg, setMsg] = useState({type: '', text: ''});
     const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
@@ -30,10 +30,14 @@ function UserSignup() {
             if (response.status === 200) {
                 console.log('Usuario creado');
                 navigate('/login');
-                setMsg({type: 3, text: 'Usuario creado exitosamente'});
+                setMsg({type: 'success', text: 'Usuario creado exitosamente'});
             }
         }).catch((error) => {
-            setMsg({type: 1, text: 'Error al crear usuario'});
+            if (error.response.status === 409) {
+                setMsg({type: 'error', text: 'Usuario ya existe'});
+            } else {
+                setMsg({type: 'error', text: 'Error al crear usuario'});
+            }
         });
     }
     return (
@@ -101,8 +105,9 @@ function UserSignup() {
                             />
 
                         </div>
-                        {msg.type === 1 && <p className="error">{msg.text}</p>}
-                        {msg.type === 3 && <p className="success">{msg.text}</p>}
+                        <p className={msg.type}>{msg.text}</p>
+                        {/* {msg.type === 1 && <p className="error">{msg.text}</p>}
+                        {msg.type === 3 && <p className="success">{msg.text}</p>} */}
                         <button href='/' onClick={handleSubmit} className="form-button">Crear cuenta</button>
 
                     </form>
