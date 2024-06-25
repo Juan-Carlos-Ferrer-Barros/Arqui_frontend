@@ -23,7 +23,7 @@ function AuthProvider({ children }) {
         setToken(null);
         setName(null);
         // setUserId(false);
-        window.location.reload(false);
+        //window.location.reload(false);
         console.log("logout");
     }
 
