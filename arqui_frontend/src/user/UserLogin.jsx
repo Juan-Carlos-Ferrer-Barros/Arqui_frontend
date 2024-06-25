@@ -26,7 +26,8 @@ function UserLogin() {
             }
             if (response.data.access_token) {
                 login(response.data.access_token, response.data.name);
-                navigate('/')
+                navigate('/');
+                window.location.reload();
             }
             // console.error(response);
         }).catch((error) => {
