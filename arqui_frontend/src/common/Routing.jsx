@@ -11,6 +11,7 @@ import EstadoCompras from "../Tickets/EstadoCompra"
 import PrivateRoute from "../auth/PrivateRoute"
 import Recommendations from "../Tickets/Recommendations"
 import EstadoPago from "../Tickets/EstadoPago"
+import Profile from "../user/Profile"
 
 export default function Routing(){
 
@@ -41,6 +42,9 @@ export default function Routing(){
                 }/>
                 <Route path={'/transaction'} element={
                     <EstadoPago />
+                }/>
+                <Route path={'/profile'} element={
+                    <PrivateRoute element={Profile} />
                 }/>
                 <Route path={'*'} element={<h1>Page not found</h1>}/>
             </Routes>
