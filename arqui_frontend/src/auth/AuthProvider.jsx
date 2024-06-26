@@ -17,6 +17,7 @@ function AuthProvider({ children }) {
     }, [name]);
 
     useEffect(() => {
+
         localStorage.setItem("isAdmin", isAdmin);
     }, [isAdmin]);
 
@@ -27,10 +28,12 @@ function AuthProvider({ children }) {
     function logout() {
         setToken(null);
         setName(null);
+        setAdmin(null);
         // setUserId(false);
         window.location.reload(false);
         console.log("logout");
     }
+
 
     function login(token, name, isAdmin) {
         // setUserId(userId);
@@ -41,6 +44,7 @@ function AuthProvider({ children }) {
     }
 
     return (
+
         <AuthContext.Provider value={{ token, name, isAdmin, login, logout }}>
             {children}
         </AuthContext.Provider>
