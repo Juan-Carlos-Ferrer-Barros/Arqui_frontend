@@ -13,7 +13,6 @@ function AllTickets() {
     const navigate = useNavigate();
 
     const token = localStorage.getItem('token');
-    const admin = localStorage.getItem('admin') === 'true';
     const [isLogged, setIsLogged] = useState(token !== "null");
 
     const [flights, setFlights] = useState([]);
@@ -52,7 +51,7 @@ function AllTickets() {
     // {url}/flights?departure={departure}&arrival={arrival}&date={date}
 
     useEffect(() => {
-        axios.get(`${import.meta.env.VITE_API_URL}/flights?page=${currentPage}`)
+        axios.get(`${import.meta.env.VITE_API_URL}/reservation`)
         .then(response => {
             setFlights(response.data.flights);
             //console.log(response.data.flights);
@@ -97,12 +96,11 @@ function AllTickets() {
         setDisplayedDays(getDisplayedDays());
     }, [selectedDate, currentPage]);
 
-    const realizarPosibleCompra = (flight) => {
+    const realizarPosibleCompra = (request) => {
         if (!isLogged) {
             alert("Debe iniciar sesión para comprar.");
-        } 
-        else {
-            navigate(`/compra/${flight._id}`);
+        } else {
+            navigate(`/compraoferta/${request._id}`);
         }
     };
 
@@ -140,9 +138,6 @@ function AllTickets() {
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                     <p className='tipo'>Directo</p>
                     {selectedFlight === index && (
-                        // Quiero que solo si isAdmin = True, se pueda comprar un pasaje 
-                        // y si no, se muestre un mensaje que diga "Debe iniciar sesión para comprar"
-                        
                         <button className='buy-ticket' onClick={() => realizarPosibleCompra(flight)}>Comprar pasaje</button>
                     )}
                 </div>

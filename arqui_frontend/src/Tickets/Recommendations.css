@@ -264,3 +264,14 @@ margin-left: 10px;
   text-align: right;
 
 }
+
+.recomendacion{
+  position: absolute;
+  padding: 2rem;
+  color: #0e1a9d;
+  margin: -30px;
+  text-align: right;
+  font-family: 'Cooper Hewitt Thin', sans-serif;
+  left: 14%;
+  font-size: 2em;
+}

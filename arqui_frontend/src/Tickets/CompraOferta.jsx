@@ -11,7 +11,7 @@ import Spinner from '../common/Spinner';
 
 
 function Compra() {
-    const { flightId } = useParams(); // Suponiendo que flightId es el parámetro que identifica el vuelo seleccionado
+    const { requestId } = useParams(); // Suponiendo que flightId es el parámetro que identifica el vuelo seleccionado
     const [flightInfo, setFlightInfo] = useState(null);
     const [cantidadPasajes, setCantidadPasajes] = useState(1);
     const [showButton, setShowButton] = useState(false);
@@ -36,19 +36,19 @@ function Compra() {
 
 
     useEffect(() => {
-        axios.get(`${import.meta.env.VITE_API_URL}/flights/${flightId}`)
+        axios.get(`${import.meta.env.VITE_API_URL}/reservation/${requestId}`)
             .then(response => {
                 setFlightInfo(response.data);
             })
             .catch(error => {
                 console.error('Error fetching flight information:', error);
             });
-    }, [flightId]);
+    }, [requestId]);
 
     const realizarCompra = async () => {
         const datosCompra = {
-            flight_id: flightId,
-            quantity: cantidadPasajes
+            user_id: userId,
+            request_id: requestId,
         };
 
         if (flightInfo.available_seats <  cantidadPasajes){
@@ -58,7 +58,7 @@ function Compra() {
         else {
             console.log(datosCompra);
             // const response = await sendAuthRequest('POST', 'localhost:3000/request', token, datosCompra);
-            const response = await axios.post(`${import.meta.env.VITE_API_URL}/request`, {
+            const response = await axios.post(`${import.meta.env.VITE_API_URL}/reservation`, {
                 headers: {
                     Authorization: token,
                 },
