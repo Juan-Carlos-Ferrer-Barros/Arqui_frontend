@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 function AuthProvider({ children }) {
     const [token, setToken] = useState(localStorage.getItem("token") || null);
     const [name, setName] = useState(localStorage.getItem("name") || null);
-    const [admin, setAdmin] = useState(localStorage.getItem("admin") || null);
+    const [isAdmin, setIsAdmin] = useState(localStorage.getItem("isAdmin") || null);
     // const [userId, setUserId] = useState(localStorage.getItem("userId") || null);
 
     useEffect(() => {
@@ -17,8 +17,9 @@ function AuthProvider({ children }) {
     }, [name]);
 
     useEffect(() => {
-        localStorage.setItem("admin", admin);
-    }, [admin]);
+
+        localStorage.setItem("isAdmin", isAdmin);
+    }, [isAdmin]);
 
     // useEffect(() => {
     //     localStorage.setItem("userId", userId);
@@ -33,16 +34,18 @@ function AuthProvider({ children }) {
         console.log("logout");
     }
 
-    function login(token, name, admin) {
+
+    function login(token, name, isAdmin) {
         // setUserId(userId);
         setToken(token);
         setName(name);
-        setAdmin(admin);
+        setIsAdmin(isAdmin);
         console.log("login");
     }
 
     return (
-        <AuthContext.Provider value={{ token, name, admin, login, logout }}>
+
+        <AuthContext.Provider value={{ token, name, isAdmin, login, logout }}>
             {children}
         </AuthContext.Provider>
     );
