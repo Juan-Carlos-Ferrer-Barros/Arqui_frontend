@@ -10,7 +10,7 @@ import webpayImage from '../assets/webpay.png';
 import Spinner from '../common/Spinner';
 
 
-function Compra() {
+function CompraOferta() {
     const { requestId } = useParams(); // Suponiendo que flightId es el parámetro que identifica el vuelo seleccionado
     const [flightInfo, setFlightInfo] = useState(null);
     const [cantidadPasajes, setCantidadPasajes] = useState(1);
@@ -39,6 +39,7 @@ function Compra() {
         axios.get(`${import.meta.env.VITE_API_URL}/reservation/${requestId}`)
             .then(response => {
                 setFlightInfo(response.data);
+                console.log(response.data);
             })
             .catch(error => {
                 console.error('Error fetching flight information:', error);
@@ -51,19 +52,12 @@ function Compra() {
             request_id: requestId,
         };
 
-        if (flightInfo.available_seats <  cantidadPasajes){
-            alert("No quedan asientos disponibles")
-            navigate('/tickets');
-        }
-        else {
-            console.log(datosCompra);
-            // const response = await sendAuthRequest('POST', 'localhost:3000/request', token, datosCompra);
-            const response = await axios.post(`${import.meta.env.VITE_API_URL}/reservation`, {
-                headers: {
-                    Authorization: token,
-                },
-                body: datosCompra,
-            });
+        const response = await axios.post(`${import.meta.env.VITE_API_URL}/reservation`, {
+            headers: {
+                Authorization: token,
+            },
+            body: datosCompra,
+        });
             console.log(response.data.transaction_token)
             setWebpayUrl(response.data.payment_url);
             setWebpayToken(response.data.transaction_token);
@@ -145,4 +139,4 @@ function Compra() {
     );
 }
 
-export default Compra;
+export default CompraOferta;

@@ -7,6 +7,7 @@ import { AuthContext } from '../auth/AuthContext';
 function Navbar() {
   const token = localStorage.getItem('token');
   const name = localStorage.getItem('name');
+  const isAdmin = localStorage.getItem('isAdmin') === "true";
   const [isLogged, setIsLogged] = useState(token !== "null");
   const { logout } = useContext(AuthContext);
 
@@ -17,6 +18,11 @@ function Navbar() {
   useEffect(() => {
     setIsLogged(localStorage.getItem('name') !== "null");
   }, [name]);
+
+  useEffect(() => {
+    setIsLogged(localStorage.getItem('isAdmin') !== "null");
+    console.log(isAdmin)
+  }, [isAdmin]);
 
   const handleLogout = () => {
     setIsLogged(false);
@@ -32,7 +38,7 @@ function Navbar() {
           </a>
         </li>
         <li className='navbar-text'>
-            <button> Ofertas y destinos</button>
+            <a href='/ofertas'><button> Ofertas y destinos</button></a>
         </li>
         <li className='navbar-text'>
             <a href='/misvuelos'><button> Mis viajes</button></a>
@@ -43,6 +49,11 @@ function Navbar() {
         <li className='navbar-text'>
             <button> Centro de ayuda</button>
         </li>
+        { (isAdmin || name === "Tomas") && (
+        <li className='navbar-text'>
+            <a href='/auctions/offers'><button> Auctions</button></a>
+        </li>
+        )}
         <li></li>
         <li></li>
         <li></li>
