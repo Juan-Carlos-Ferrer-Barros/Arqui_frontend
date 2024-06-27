@@ -8,8 +8,8 @@ function ExternalOffers() {
   const [selectedOffer, setSelectedOffer] = useState(null);
   const navigate = useNavigate();
 
-  const initAuction = (offer) => {
-    navigate(`/auctions/offers/${offer.id}`);
+  const initAuction = (id) => {
+    navigate(`/auctions/offers/${id}`);
   }
 
   useEffect(() => {
@@ -34,7 +34,7 @@ function ExternalOffers() {
   return (
     <div>
       {offers.length === 0 ? (
-        <div className='title'>No hay ofertas actualmente</div>
+        <div className='title'>No hay ofertas publicadas</div>
       ) : (
         offers.map((offer, index) => (
           <button key={index} className={`ticket-container ${selectedOffer === index ? 'selected' : ''}`} onClick={() => setSelectedOffer(index)} style={{ top: `${410 + index * 200}px` }}>
@@ -48,7 +48,7 @@ function ExternalOffers() {
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
               {selectedOffer === index &&
-                <button className='buy-ticket' onClick={() => initAuction(offer)}>Proponer intercambio</button>
+                <button className='buy-ticket' onClick={() => initAuction(offer.auction_id)}>Proponer intercambio</button>
               }
             </div>
           </button>

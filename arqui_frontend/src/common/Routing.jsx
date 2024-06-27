@@ -15,6 +15,10 @@ import Profile from "../user/Profile"
 import Ofertas from "../Tickets/Ofertas"
 import CompraOferta from "../Tickets/CompraOferta"
 import ExternalOffers from "../auctions/ExternalOffers"
+import CreateProposal from "../auctions/CreateProposal"
+import MyOffers from "../auctions/MyOffers"
+import CreateOffer from "../auctions/CreateOffer"
+// import Proposals from "../auctions/Proposals"
 
 
 export default function Routing(){
@@ -33,7 +37,11 @@ export default function Routing(){
                 <Route path={'/tickets'} element={<AllTickets />}/>
                 <Route path={'/ofertas'} element={<Ofertas />}/>
                 <Route path={'/compraoferta/:requestId'} element={<CompraOferta />}/>
-                <Route path={'/auctions/offers'} element={<ExternalOffers />}/>
+                <Route path={'/auctions'} element={<ExternalOffers />}/>
+                <Route path={'/auctions/offers/:offerId'} element={<CreateProposal />}/>
+                <Route path={'/myoffers'} element={<MyOffers />}/>
+                <Route path={'/auctions/create'} element={<CreateOffer />}/>
+                {/* <Route path={'/myproposals'} element={<Proposals />}/> */}
                 {/* <Route path={'/misvuelos'} element={<><Navbar /><MisVuelos /></>}/> */}
                 {/* PrivateRoute es una ruta que solo se accede si esta loggeado */}
                 {/* <Route path={'/misvuelos'} element={<PrivateRoute element={<><Navbar /><MisVuelos /></>} />}/> */}

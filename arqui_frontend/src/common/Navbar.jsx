@@ -18,8 +18,6 @@ function Navbar() {
   //   console.log('state', state);
   //   return state;
   // });
-  const isLogged = localStorage.getItem('token') !== "null";
-  const { logout } = useContext(AuthContext);
   console.log('isLogged', isLogged);
   console.log('token', token);
   console.log('name', name);
@@ -66,11 +64,17 @@ function Navbar() {
         <li className='navbar-text'>
             <button> Centro de ayuda</button>
         </li>
-        { (isAdmin || name === "Tomas") && (
-        <li className='navbar-text'>
-            <a href='/auctions/offers'><button> Auctions</button></a>
-        </li>
-        )}
+        { (isAdmin || name === "Tomas") && (<>
+          <li className='navbar-text'>
+              <a href='/auctions'><button> Auctions</button></a>
+          </li>
+          <li className='navbar-text'>
+              <a href='/myoffers'><button> Ofertas enviadas</button></a>
+          </li>
+          <li className='navbar-text'>
+              <a href='/myproposals'><button> Propuestas enviadas</button></a>
+          </li>
+        </>)}
         <li></li>
         <li></li>
         <li></li>

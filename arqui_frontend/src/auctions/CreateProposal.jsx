@@ -11,17 +11,13 @@ function CreateProposal() {
   const token = localStorage.getItem('token');
   const [responseStatus, setResponseStatus] = useState({});
 
-  const createProposal = async () => {
-    const data = {
-      auction_id: offerId,
-      flight_id: selectedFlight.id,
-      quantity: quantity,
-    };
-    const response = await axios.post(`${import.meta.env.VITE_API_URL}/auctions/proposal`, {
+  const createProposal = async (request_id) => {
+    console.log(token);
+    const response = await axios.post(`${import.meta.env.VITE_API_URL}/auctions/proposal/${offerId}/${request_id}`, {
       headers: {
         Authorization: token,
       },
-      body: data,
+      body: null,
     });
     setResponseStatus(response.status);
     // window.location.reload();
@@ -76,7 +72,7 @@ function CreateProposal() {
           </div>
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             {selectedFlight === index &&
-              <button className='buy-ticket' onClick={createProposal}>Proponer intercambio</button>
+              <button className='buy-ticket' onClick={() => createProposal(reservation._id)}>Proponer intercambio</button>
             }
           </div>
         </button>
