@@ -7,12 +7,16 @@ function CreateOffer () {
   const [responseStatus, setResponseStatus] = useState({});
   const token = localStorage.getItem('token');
 
+  const headers = {
+    'Authorization': token,
+  }
+  const data = {
+    'quantity': 1,
+  }
+
   const sendOffer = async (request_id) => {
-    const response = await axios.post(`${import.meta.env.VITE_API_URL}/auctions/offer/${request_id}`, {
-      headers: {
-        Authorization: token,
-      },
-      body: null,
+    const response = await axios.post(`${import.meta.env.VITE_API_URL}/auctions/offer/${request_id}`, data, {
+      headers: headers
     });
     setResponseStatus(response.status);
     // window.location.reload();

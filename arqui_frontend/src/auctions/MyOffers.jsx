@@ -13,7 +13,7 @@ function MyOffers() {
   
   const selectOffer = (index, offer_id) => {
     setSelectedOffer(index);
-    axios.get(`${import.meta.env.VITE_API_URL}/auctions/${offer_id}/proposals`, {
+    axios.get(`${import.meta.env.VITE_API_URL}/proposals/${offer_id}`, {
       headers: {
         Authorization: token,
       },
@@ -62,7 +62,7 @@ function MyOffers() {
   }
 
   useEffect(() => {
-    axios.get(`${import.meta.env.VITE_API_URL}/auctions/offers/sent`, {
+    axios.get(`${import.meta.env.VITE_API_URL}/offers/sent`, {
       headers: {
         Authorization: token,
       },

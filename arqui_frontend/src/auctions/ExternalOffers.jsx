@@ -13,7 +13,7 @@ function ExternalOffers() {
   }
 
   useEffect(() => {
-    axios.get(`${import.meta.env.VITE_API_URL}/auctions/offers`)
+    axios.get(`${import.meta.env.VITE_API_URL}/auctions`)
       .then(response => {
         console.log('API Response:', response);
         if (response.data && Array.isArray(response.data.auctions)) {
