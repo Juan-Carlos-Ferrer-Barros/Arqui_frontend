@@ -64,7 +64,6 @@ function CompraOferta() {
             console.log("RESPONSE: ", response);
             setShowButton(true);
         }
-    };
 
     const sendToWebpay = async () => {
         const form = document.createElement('form');
@@ -133,10 +132,8 @@ function CompraOferta() {
             ) : (
                 <p>Cargando información del vuelo...</p>
             )}
-
-
         </div>
-    );
+    )
 }
 
 export default CompraOferta;
