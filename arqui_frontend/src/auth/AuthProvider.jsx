@@ -30,7 +30,7 @@ function AuthProvider({ children }) {
         setName(null);
         setIsAdmin(null);
         // setUserId(false);
-        window.location.reload(false);
+        //window.location.reload(false);
         console.log("logout");
     }
 

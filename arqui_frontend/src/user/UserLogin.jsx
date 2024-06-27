@@ -25,8 +25,10 @@ function UserLogin() {
                 setMsg({type: 2, text: 'Usuario no encontrado'});
             }
             if (response.data.access_token) {
+
                 login(response.data.access_token, response.data.name, response.data.isAdmin);
-                navigate('/')
+                navigate('/');
+                window.location.reload();
             }
             // console.error(response);
         }).catch((error) => {

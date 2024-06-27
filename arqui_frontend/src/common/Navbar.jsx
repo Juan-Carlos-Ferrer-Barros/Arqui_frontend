@@ -11,13 +11,30 @@ function Navbar() {
   const [isLogged, setIsLogged] = useState(token !== "null");
   const { logout } = useContext(AuthContext);
 
-  useEffect(() => {
-    setIsLogged(localStorage.getItem('token') !== "null");
-  }, [token]);
+  // const [isLogged, setIsLogged] = useState(() => {
+  //   const savedToken = JSON.parse(localStorage.getItem('token')) || "null";
+  //   console.log('savedToken', savedToken);
+  //   const state = savedToken !== "null";
+  //   console.log('state', state);
+  //   return state;
+  // });
+  const isLogged = localStorage.getItem('token') !== "null";
+  const { logout } = useContext(AuthContext);
+  console.log('isLogged', isLogged);
+  console.log('token', token);
+  console.log('name', name);
 
-  useEffect(() => {
-    setIsLogged(localStorage.getItem('name') !== "null");
-  }, [name]);
+  // useEffect(() => {
+  //   //window.location.reload(false);
+  //   setIsLogged(localStorage.getItem('token') !== "null");
+  //   console.log('1', isLogged);
+  // }, []);
+  
+  // useEffect(() => {
+  //   const savedName = JSON.parse(localStorage.getItem('name'));
+  //   setIsLogged(savedName !== "null");
+  //   console.log('2', isLogged);
+  // }, [name]);
 
   useEffect(() => {
     setIsLogged(localStorage.getItem('isAdmin') !== "null");
@@ -66,13 +83,13 @@ function Navbar() {
         <li className='navbar-text'>
             <a href='/estadocompras'><button> Estado de compra</button></a>
         </li>
-        {!isLogged ?
+        {isLogged ?
           <li className="navbar-item">
-            <a href='/login'><button className="navbar-button">Iniciar Sesión</button></a>
+            <a href='/profile' className="navbar-button"><button>{name}</button></a>
           </li>
           :
           <li className="navbar-item">
-            <button onClick={handleLogout} className="navbar-button">{name}</button>
+            <a href='/login'><button className="navbar-button">Iniciar Sesión</button></a>
           </li>
         }
       </ul>
