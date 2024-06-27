@@ -13,6 +13,7 @@ function AllTickets() {
     const navigate = useNavigate();
 
     const token = localStorage.getItem('token');
+    const admin = localStorage.getItem('admin') === 'true';
     const [isLogged, setIsLogged] = useState(token !== "null");
 
     const [flights, setFlights] = useState([]);
@@ -99,7 +100,8 @@ function AllTickets() {
     const realizarPosibleCompra = (flight) => {
         if (!isLogged) {
             alert("Debe iniciar sesión para comprar.");
-        } else {
+        } 
+        else {
             navigate(`/compra/${flight._id}`);
         }
     };
@@ -138,6 +140,9 @@ function AllTickets() {
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                     <p className='tipo'>Directo</p>
                     {selectedFlight === index && (
+                        // Quiero que solo si isAdmin = True, se pueda comprar un pasaje 
+                        // y si no, se muestre un mensaje que diga "Debe iniciar sesión para comprar"
+                        
                         <button className='buy-ticket' onClick={() => realizarPosibleCompra(flight)}>Comprar pasaje</button>
                     )}
                 </div>

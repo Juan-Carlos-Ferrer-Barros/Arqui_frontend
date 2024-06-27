@@ -13,6 +13,8 @@ function UserSignup() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [msg, setMsg] = useState({type: '', text: ''});
+    const [isAdmin, setIsAdmin] = useState(false);
+
     const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
@@ -109,6 +111,7 @@ function UserSignup() {
                         {/* {msg.type === 1 && <p className="error">{msg.text}</p>}
                         {msg.type === 3 && <p className="success">{msg.text}</p>} */}
                         <button href='/' onClick={handleSubmit} className="form-button">Crear cuenta</button>
+                        
 
                     </form>
             </div>

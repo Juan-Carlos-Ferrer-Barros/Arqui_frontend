@@ -12,6 +12,10 @@ import PrivateRoute from "../auth/PrivateRoute"
 import Recommendations from "../Tickets/Recommendations"
 import EstadoPago from "../Tickets/EstadoPago"
 import Profile from "../user/Profile"
+import Ofertas from "../Tickets/Ofertas"
+import CompraOferta from "../Tickets/CompraOferta"
+import ExternalOffers from "../auctions/ExternalOffers"
+
 
 export default function Routing(){
 
@@ -27,6 +31,9 @@ export default function Routing(){
                 <Route path={'/signup'} element={<UserSignup />}/>
                 <Route path={'/ticket/flights/:formDeparture/:formArrival/:formDate'} element={<Ticket />}/>
                 <Route path={'/tickets'} element={<AllTickets />}/>
+                <Route path={'/ofertas'} element={<Ofertas />}/>
+                <Route path={'/compraoferta/:requestId'} element={<CompraOferta />}/>
+                <Route path={'/auctions/offers'} element={<ExternalOffers />}/>
                 {/* <Route path={'/misvuelos'} element={<><Navbar /><MisVuelos /></>}/> */}
                 {/* PrivateRoute es una ruta que solo se accede si esta loggeado */}
                 {/* <Route path={'/misvuelos'} element={<PrivateRoute element={<><Navbar /><MisVuelos /></>} />}/> */}
