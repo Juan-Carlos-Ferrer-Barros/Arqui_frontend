@@ -31,7 +31,7 @@ export default function Routing(){
                 <Route path={'/ticket/flights/:formDeparture/:formArrival/:formDate'} element={<Ticket />}/>
                 <Route path={'/tickets'} element={<AllTickets />}/>
                 <Route path={'/ofertas'} element={<Ofertas />}/>
-                <Route path={'/compraoferta/:requestId'} element={<CompraOferta />}/>
+                <Route path={'/compraoferta'} element={<CompraOferta />}/>
                 <Route path={'/auctions/offers'} element={<ExternalOffers />}/>
                 {/* <Route path={'/misvuelos'} element={<><Navbar /><MisVuelos /></>}/> */}
                 {/* PrivateRoute es una ruta que solo se accede si esta loggeado */}

@@ -2,6 +2,7 @@ import './Ticket.css'
 import { useState, useEffect } from 'react'
 import axios from 'axios';
 import { Link , useNavigate } from 'react-router-dom';
+import queryString from 'query-string';
 
 function Ofertas() {
 
@@ -29,7 +30,14 @@ function Ofertas() {
             alert("Debe iniciar sesión para comprar.");
         } 
         else {
-            navigate(`/compraoferta/${request._id}`);
+            const query = queryString.stringify({
+                requestId: request._id,
+                userId: request.user_id,
+                flightId: request.flight_id,
+                quantity: request.quantity
+            });
+
+            navigate(`/compraoferta?${query}`);
         }
     };
 

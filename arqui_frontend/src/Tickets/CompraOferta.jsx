@@ -8,10 +8,13 @@ import sendAuthRequest from '../auth/authRequest';
 import { useNavigate } from 'react-router-dom';
 import webpayImage from '../assets/webpay.png';
 import Spinner from '../common/Spinner';
+import { useLocation } from 'react-router-dom';
+import queryString from 'query-string';
 
 
 function CompraOferta() {
-    const { requestId } = useParams(); // Suponiendo que flightId es el parámetro que identifica el vuelo seleccionado
+    const location = useLocation();
+    const { requestId, userId, flightId, quantity } = queryString.parse(location.search);
     const [flightInfo, setFlightInfo] = useState(null);
     const [cantidadPasajes, setCantidadPasajes] = useState(1);
     const [showButton, setShowButton] = useState(false);
@@ -36,7 +39,7 @@ function CompraOferta() {
 
 
     useEffect(() => {
-        axios.get(`${import.meta.env.VITE_API_URL}/reservation/${requestId}`)
+        axios.get(`${import.meta.env.VITE_API_URL}/flights/${flightId}`)
             .then(response => {
                 setFlightInfo(response.data);
                 console.log(response.data);
@@ -50,21 +53,21 @@ function CompraOferta() {
         const datosCompra = {
             user_id: userId,
             request_id: requestId,
+            quantity: quantity
         };
 
-        const response = await axios.post(`${import.meta.env.VITE_API_URL}/reservation`, {
+        const response = await axios.post(`${import.meta.env.VITE_API_URL}/reservation/${requestId}`, {
             headers: {
                 Authorization: token,
             },
-            body: datosCompra,
+            //body: datosCompra,
         });
             console.log(response.data.transaction_token)
             setWebpayUrl(response.data.payment_url);
             setWebpayToken(response.data.transaction_token);
             console.log("RESPONSE: ", response);
             setShowButton(true);
-        }
-    };
+        };
 
     const sendToWebpay = async () => {
         const form = document.createElement('form');
